@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
     <title>GLP</title>
@@ -13,7 +11,6 @@
     <link rel="stylesheet" href="bootstrap/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bootstrap/dist/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="bootstrap/plugins/iCheck/flat/blue.css">
     <link rel="stylesheet" href="bootstrap/plugins/morris/morris.css">

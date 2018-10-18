@@ -1,9 +1,12 @@
 <?php
 
+    ini_set('default_charset','ISO 8859-1');
+    
     class Csv
     {
         public function importar()
         {
+
             $xls = new Xls();
             $meuArray = Array();
             $i = 0;

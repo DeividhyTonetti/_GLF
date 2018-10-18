@@ -1,92 +1,172 @@
 <?php
 
+    require '../model/vendor/autoload.php'; // depois colocar director
+
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
     class Xls
     {
+
+      //criar metodos pivados para alterar as informações de size e style word
         public function printTable($data)
         {
+            $spreadsheet = new Spreadsheet();
+            $writer = new Xlsx($spreadsheet);
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+
             $arquivo = 'planilha.xls';
+            $i = 8;
 
             foreach ($data as $key => $value) 
             {  
-                $dataFinal[] = 
-                [   
-                    'disciplina' => $data[$key]['disciplina'],
-                    'numDis' => $data[$key]['numDis'],
-                    'matricula' => $data[$key]['matricula'],
-                    'nomeAlu' => $data[$key]['nomeAlu']
-                ];
+              $dataFinal[] = 
+              [   
+                  'disciplina' => $data[$key]['disciplina'],
+                  'numDis' => $data[$key]['numDis'],
+                  'matricula' => $data[$key]['matricula'],
+                  'nomeAlu' => $data[$key]['nomeAlu']
+              ];
             }
-            $html = 
-            '
-                <!DOCTYPE html>
-                  <html lang="PT-BR">
-                  <head>
-                    <meta charset="ISO 8859-1">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <meta http-equiv="x-ua-compatible" content="ie=edge">
-                    <meta charset="ISO 8859-1">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-                    <title>GLP</title>
-        
-                  </head>
-
-                  <body class="hold-transition sidebar-mini">
-                <table width="300px" border="1px" bordercolor="black">
-                <tr>
-                  <th class="tg-wvxr" colspan="5"><img src="../view/img/Universidade.png"  height="42" width="300"></th>
-                  <th class="tg-ir8p" rowspan="3"></th>
-                  <th class="tg-iu89" rowspan="2"><span style="font-weight:bold;text-decoration:underline">Pag.</span><br><span style="font-weight:bold">1</span></th>
-                </tr>
-                <tr>
-                <td class="tg-xds7" colspan="2"></td>
-                <td class="tg-g5qm">'.$dataFinal[$key]['disciplina'].'</td>
-                <td class="tg-8rb3" colspan="2">Turma: <span style="font-weight:bold">'.$dataFinal[$key]['numDis'].'</span></td>
-              </tr>
-              <tr>
-                <td class="tg-vhpi">Ordem</td>
-                <td class="tg-4qi8"><span style="font-weight:bold">Matr�cula</span></td>
-                <td class="tg-e7lt">Aluno</td>
-                <td class="tg-e7lt"> Nota</td>
-                <td class="tg-vhpi">Freq.</td>
-                <td class="tg-t2qg">Ordem</td>
-              </tr>
-            ';
 
             foreach($dataFinal as $key => $value)
             {
-              $html .=
-              '  <tr>
-                  <td class="tg-kvd6">'.$key.'</td>
-                  <td class="tg-rqvj">'.$dataFinal[$key]['matricula'].'</td>
-                  <td class="tg-rqvj">'.$dataFinal[$key]['nomeAlu'].'</td>
-                  <td class="tg-rqvj"></td>
-                  <td class="tg-kvd6"></td>
-                  <td class="tg-72fs"></td>
-                  <td class="tg-kvd6">'.$key.'</td>
-                </tr>
-              ';
+
+              $dataFinal[$key]['nomeAlu'] = utf8_encode($dataFinal[$key]['nomeAlu']);
+              //Seto o tamanho da letra e o tipo
+              $spreadsheet->getDefaultStyle()->getFont()->setName('Times New Roman');
+              $spreadsheet->getDefaultStyle()->getFont()->setSize(12);
+
+              //Seto as laguras das colunas
+              $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(38);
+              $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+
+              // Seto o idioma
+              $locale = 'pt_br';
+              $validLocale = \PhpOffice\PhpSpreadsheet\Settings::setLocale($locale);
+              
+              if (!$validLocale) 
+              {
+                  echo 'Não encontramos o idioma '.$locale." - Revertendo para EN_US<br/>\n";
+              }
+
+              //Inserimos a imagem
+              $drawing->setName('logoUFSC');
+              $drawing->setDescription('logoUFSC');
+              $drawing->setPath('../view/img/Universidade.png');
+              $drawing->setCoordinates('A1');
+              $drawing->getShadow()->setVisible(true);
+
+              
+              
+              // Seto o tipo de página
+              $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+              $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+
+              //Mesclo as células
+              $spreadsheet->getActiveSheet()->mergeCells('A1:E5');
+              $spreadsheet->getActiveSheet()->mergeCells('A6:B6');
+              $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
+              $spreadsheet->getActiveSheet()->mergeCells('F4:F7');
+              $spreadsheet->getActiveSheet()->mergeCells('AQ4:AQ5');
+              $spreadsheet->getActiveSheet()->mergeCells('F3:AQ3');
+
+              //Insiro dados nas células
+              $spreadsheet->getActiveSheet()->setCellValue('F3', 'LISTA DE FREQUÊNCIA');
+              $spreadsheet->getActiveSheet()->setCellValue('A6', 'ARA-ALGUMACOISA');
+              $spreadsheet->getActiveSheet()->setCellValue('C6', $dataFinal[$key]['disciplina']);
+              $spreadsheet->getActiveSheet()->setCellValue('D6', 'Turma:'.$data[$key]['numDis']);
+              $spreadsheet->getActiveSheet()->setCellValue('AQ4', 'Pág.');
+              $spreadsheet->getActiveSheet()->setCellValue('AQ3', '1');
+              $spreadsheet->getActiveSheet()->setCellValue('AQ2', 'Ordem');
+              $spreadsheet->getActiveSheet()->setCellValue('A7', 'Ordem');
+              $spreadsheet->getActiveSheet()->setCellValue('B7', 'Matrícula');
+              $spreadsheet->getActiveSheet()->setCellValue('C7', 'Aluno');
+              $spreadsheet->getActiveSheet()->setCellValue('D7', 'Nota');
+              $spreadsheet->getActiveSheet()->setCellValue('E7', 'Freq.');
+              $spreadsheet->getActiveSheet()->setCellValue('F4', 'TESTE');
+
+              $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+              $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
+              $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+
+              //Quebro linha caso haja necessidade 
+
+              $spreadsheet->getActiveSheet()->getStyle('C8:C18')->getAlignment()->setWrapText(true);
+
+              // Costruimos um array para setar os estilos de linha, font, borda, cores, alinhamento etc..
+            
+              /*Border style 
+                      BORDER_NONE             = 'none';
+                      BORDER_DASHDOT          = 'dashDot';
+                      BORDER_DASHDOTDOT       = 'dashDotDot';
+                      BORDER_DASHED           = 'dashed';
+                      BORDER_DOTTED           = 'dotted';
+                      BORDER_DOUBLE           = 'double';
+                      BORDER_HAIR             = 'hair';
+                      BORDER_MEDIUM           = 'medium';
+                      BORDER_MEDIUMDASHDOT    = 'mediumDashDot';
+                      BORDER_MEDIUMDASHDOTDOT = 'mediumDashDotDot';
+                      BORDER_MEDIUMDASHED     = 'mediumDashed';
+                      BORDER_SLANTDASHDOT     = 'slantDashDot';
+                      BORDER_THICK            = 'thick';
+                      BORDER_THIN             = 'thin';
+              */ 
+
+              $styleArray = [
+                  'font' => [
+                      'bold' => true,
+                  ],
+                  'alignment' => [
+                      'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                  ],
+                  'borders' => [
+                      'allBorders' => [
+                          'borderStyle' =>  \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                      ]
+                  ],
+                  'fill' => [
+                      'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
+                      'startColor' => [
+                          'argb' => 'FFA0A0A0',
+                      ],
+                      'endColor' => [
+                          'argb' => 'FFFFFFFF',
+                      ],
+                  ],
+              ];
+
+              $spreadsheet->getActiveSheet()->getStyle('A6:E7')->applyFromArray($styleArray);
+              $spreadsheet->getActiveSheet()->getStyle('F4:F7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('AQ5:AQ7')->applyFromArray($styleArray);
+              $spreadsheet->getActiveSheet()->getStyle('F3:AQ3')->applyFromArray($styleArray);
+              $spreadsheet->getActiveSheet()->getStyle('A1:E5')->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+              $spreadsheet->getActiveSheet()->getStyle('A'.$i.':E'.$i)->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+              $spreadsheet->getActiveSheet()->getStyle('A'.$i.':B'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('C6')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+              
+              $i++;
             }
 
-            $html .= '</table>';
+            $sheet = $spreadsheet->getActiveSheet();
+            $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
-            //var_dump($html);
-            $this->donwload($html, $dataFinal[$key]['disciplina']);
-
+            $this->donwload($spreadsheet, $dataFinal[$key]['disciplina']);     
         }
 
-        public function donwload($html, $arquivo)
+        public function donwload($spreadsheet, $archiveName)
         {
-          $arquivo = trim($arquivo);
+          $archiveName = trim($archiveName);
 
-          // Configura��es header para for�ar o download
+           //Forço um donwload no formato xls
 
-          header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-          header ("Content-Disposition: attachment; filename=\"{$arquivo}\".xls" );
-          header("Cache-Control: max-age=0");
-          // Envia o conte�do do arquivo
-          echo $html;
+          header('Content-Type: application/vnd.ms-excel');
+          header("Content-Disposition: attachment; filename=\"{$archiveName}\".xls" );
+          header('Cache-Control: max-age=0');
+
+          $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+          $writer->save('php://output'); 
+          
           exit;
         }
     }
