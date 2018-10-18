@@ -11,12 +11,19 @@
       //criar metodos pivados para alterar as informações de size e style word
         public function printTable($data)
         {
+            $arquivo = 'planilha.xls';
+            $i = 8;
+
             $spreadsheet = new Spreadsheet();
             $writer = new Xlsx($spreadsheet);
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
 
-            $arquivo = 'planilha.xls';
-            $i = 8;
+            //Configuro a página para impressão
+            $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+            $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+            //$spreadsheet->getActiveSheet()->getPageSetup()->setFitToPage(100);
+            $spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1);
+            $spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0);
 
             foreach ($data as $key => $value) 
             {  
@@ -57,28 +64,25 @@
               $drawing->setCoordinates('A1');
               $drawing->getShadow()->setVisible(true);
 
-              
-              
-              // Seto o tipo de página
-              $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-              $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+            
 
               //Mesclo as células
+              $spreadsheet->getActiveSheet()->mergeCells('F1:AQ1');
+              $spreadsheet->getActiveSheet()->mergeCells('F2:AQ2');
               $spreadsheet->getActiveSheet()->mergeCells('A1:E5');
               $spreadsheet->getActiveSheet()->mergeCells('A6:B6');
               $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
               $spreadsheet->getActiveSheet()->mergeCells('F4:F7');
-              $spreadsheet->getActiveSheet()->mergeCells('AQ4:AQ5');
               $spreadsheet->getActiveSheet()->mergeCells('F3:AQ3');
-
+              
               //Insiro dados nas células
-              $spreadsheet->getActiveSheet()->setCellValue('F3', 'LISTA DE FREQUÊNCIA');
+              $spreadsheet->getActiveSheet()->setCellValue('F1', 'LISTA DE FREQUÊNCIA');
               $spreadsheet->getActiveSheet()->setCellValue('A6', 'ARA-ALGUMACOISA');
               $spreadsheet->getActiveSheet()->setCellValue('C6', $dataFinal[$key]['disciplina']);
               $spreadsheet->getActiveSheet()->setCellValue('D6', 'Turma:'.$data[$key]['numDis']);
-              $spreadsheet->getActiveSheet()->setCellValue('AQ4', 'Pág.');
-              $spreadsheet->getActiveSheet()->setCellValue('AQ3', '1');
-              $spreadsheet->getActiveSheet()->setCellValue('AQ2', 'Ordem');
+              $spreadsheet->getActiveSheet()->setCellValue('AQ5', 'Pág.');
+              $spreadsheet->getActiveSheet()->setCellValue('AQ6', '1');
+              $spreadsheet->getActiveSheet()->setCellValue('AQ7', 'Ordem');
               $spreadsheet->getActiveSheet()->setCellValue('A7', 'Ordem');
               $spreadsheet->getActiveSheet()->setCellValue('B7', 'Matrícula');
               $spreadsheet->getActiveSheet()->setCellValue('C7', 'Aluno');
@@ -86,9 +90,22 @@
               $spreadsheet->getActiveSheet()->setCellValue('E7', 'Freq.');
               $spreadsheet->getActiveSheet()->setCellValue('F4', 'TESTE');
 
-              $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
-              $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
-              $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+            if($i % 2 == 1)
+            {
+                $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+                $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
+                $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+            
+            }
+            else
+            {
+                $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+                $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
+                $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+
+                $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFA0A0A0');
+            }              
+
 
               //Quebro linha caso haja necessidade 
 
@@ -137,14 +154,20 @@
               ];
 
               $spreadsheet->getActiveSheet()->getStyle('A6:E7')->applyFromArray($styleArray);
-              $spreadsheet->getActiveSheet()->getStyle('F4:F7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-              $spreadsheet->getActiveSheet()->getStyle('AQ5:AQ7')->applyFromArray($styleArray);
               $spreadsheet->getActiveSheet()->getStyle('F3:AQ3')->applyFromArray($styleArray);
+
+              //alguns styles estou usando fora do vetor -- mas seria de suma importância fazer dentro de um vetor
+              $spreadsheet->getActiveSheet()->getStyle('F4:F7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('AQ4:AQ7')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+              $spreadsheet->getActiveSheet()->getStyle('AQ5:AQ7')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('AQ5')->getFont()->setUnderline(true);
               $spreadsheet->getActiveSheet()->getStyle('A1:E5')->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-              $spreadsheet->getActiveSheet()->getStyle('A'.$i.':E'.$i)->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+              $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
               $spreadsheet->getActiveSheet()->getStyle('A'.$i.':B'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
               $spreadsheet->getActiveSheet()->getStyle('C6')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+              $spreadsheet->getActiveSheet()->getStyle('F1:AQ1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
               
+              //incremento I para ir para a próxima linha
               $i++;
             }
 

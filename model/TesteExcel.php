@@ -4,8 +4,13 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+    //Estancio os objetos
     $spreadsheet = new Spreadsheet();
     $writer = new Xlsx($spreadsheet);
+
+    //Configuro a página para impressão
+    $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+    $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
 
     // Seto o idioma
     $locale = 'pt_br';
@@ -16,9 +21,6 @@
         echo 'Não encontramos o idioma '.$locale." - Revertendo para EN_US<br/>\n";
     }
     
-    // Seto o tipo de página
-    $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
-    $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
 
     //Mesclo as células
     $spreadsheet->getActiveSheet()->mergeCells('A1:E5');
