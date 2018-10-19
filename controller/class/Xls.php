@@ -56,7 +56,8 @@
               {
                   echo 'Não encontramos o idioma '.$locale." - Revertendo para EN_US<br/>\n";
               }
-
+              
+              //---------------------------TABELA 1------------------------------
               //Inserimos a imagem
               $drawing->setName('logoUFSC');
               $drawing->setDescription('logoUFSC');
@@ -64,7 +65,6 @@
               $drawing->setCoordinates('A1');
               $drawing->getShadow()->setVisible(true);
 
-            
 
               //Mesclo as células
               $spreadsheet->getActiveSheet()->mergeCells('F1:AQ1');
@@ -93,6 +93,7 @@
             if($i % 2 == 1)
             {
                 $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+                $spreadsheet->getActiveSheet()->setCellValue('AQ'.$i, $key);
                 $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
                 $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
             
@@ -100,6 +101,7 @@
             else
             {
                 $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+                $spreadsheet->getActiveSheet()->setCellValue('AQ'.$i, $key);
                 $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
                 $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
 
@@ -152,7 +154,7 @@
                       ],
                   ],
               ];
-
+            
               $spreadsheet->getActiveSheet()->getStyle('A6:E7')->applyFromArray($styleArray);
               $spreadsheet->getActiveSheet()->getStyle('F3:AQ3')->applyFromArray($styleArray);
 
@@ -164,12 +166,26 @@
               $spreadsheet->getActiveSheet()->getStyle('A1:E5')->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
               $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
               $spreadsheet->getActiveSheet()->getStyle('A'.$i.':B'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('AQ'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
               $spreadsheet->getActiveSheet()->getStyle('C6')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
               $spreadsheet->getActiveSheet()->getStyle('F1:AQ1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-              
+              $spreadsheet->getActiveSheet()->getStyle('AQ7')->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+                 
               //incremento I para ir para a próxima linha
               $i++;
             }
+
+            //---------------------------TABELA 2------------------------------
+              
+            //Mesclo as células
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i+=2.':D'.$i+2);
+            $spreadsheet->getActiveSheet()->mergeCells('E'.$i+=2.':G'.$i+2);
+            $spreadsheet->getActiveSheet()->mergeCells('H'.$i+2.':BA'.$i+2);
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i+3.':AW'.$i+3);
+            $spreadsheet->getActiveSheet()->mergeCells('AX'.$i+3.':AB'.$i+3);
+        
+            //Insiro os dados na tabela
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$i+2.':D'.$i+2, 'Horário: ');
 
             $sheet = $spreadsheet->getActiveSheet();
             $drawing->setWorksheet($spreadsheet->getActiveSheet());
