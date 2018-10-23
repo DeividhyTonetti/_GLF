@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-    <title>GLP</title>
+    <title>GLF</title>
     
     <link rel="stylesheet" href="bootstrap/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bootstrap/dist/css/adminlte.min.css">

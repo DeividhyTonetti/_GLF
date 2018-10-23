@@ -11,6 +11,8 @@
       //criar metodos pivados para alterar as informações de size e style word
         public function printTable($data)
         {
+            $now = new Date();
+
             $arquivo = 'planilha.xls';
             $i = 8;
 
@@ -177,15 +179,59 @@
 
             //---------------------------TABELA 2------------------------------
               
-            //Mesclo as células
-            $spreadsheet->getActiveSheet()->mergeCells('A'.$i+=2.':D'.$i+2);
-            $spreadsheet->getActiveSheet()->mergeCells('E'.$i+=2.':G'.$i+2);
-            $spreadsheet->getActiveSheet()->mergeCells('H'.$i+2.':BA'.$i+2);
-            $spreadsheet->getActiveSheet()->mergeCells('A'.$i+3.':AW'.$i+3);
-            $spreadsheet->getActiveSheet()->mergeCells('AX'.$i+3.':AB'.$i+3);
+            //Mesclo as células e os styles determinando as linhas  partir do meu contador $i
+            $j= $i+1;
+
+            $i++;
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':E'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('F'.$i.':H'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('I'.$i.':AQ'.$i);
+            $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('F'.$i.':H'.$i)->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('F'.$i.':H'.$i)->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('F'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+            $i++;
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':E'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('F'.$i.':H'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('I'.$i.':AQ'.$i);
+            $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('F'.$i.':H'.$i)->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('F'.$i.':H'.$i)->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            
+            $i++;
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':AN'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('AO'.$i.':AQ'.$i);
+            $spreadsheet->getActiveSheet()->getStyle('AO'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+            $i++;
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':AN'.$i);
+            
+            $i++;
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':AN'.$i);
+            $spreadsheet->getActiveSheet()->mergeCells('AO'.$i.':AQ'.$i);
+            $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         
+           
+
             //Insiro os dados na tabela
-            $spreadsheet->getActiveSheet()->setCellValue('A'.$i+2.':D'.$i+2, 'Horário: ');
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: ');
+            $spreadsheet->getActiveSheet()->setCellValue('F'.$j, 'Chefe do Departamento');
+            $spreadsheet->getActiveSheet()->setCellValue('I'.$j, 'Professor(es):'.' SIAPE'.' - NOME');
+            
+            $j++;
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Local: ');
+
+            $j++;
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Mensagem: _Matricula Inicial.');
+            $spreadsheet->getActiveSheet()->setCellValue('AO'.$j, $now->dateNow());
+
+            $j++;
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, '                  _Não permita a presença de alunos não relaciondos, salvos autorizados pelo DAE');
+
+            $j++;
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, '                  _Site do DAE: www.dae.ufsc.br; Fórum da Graduação: www.forumgrad.ufsc.br');
+            $spreadsheet->getActiveSheet()->setCellValue('AO'.$j, 'Núcleo de Processamento de Dados');
 
             $sheet = $spreadsheet->getActiveSheet();
             $drawing->setWorksheet($spreadsheet->getActiveSheet());
