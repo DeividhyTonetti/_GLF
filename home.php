@@ -140,15 +140,21 @@
     <script type="text/javascript">
         $('.example2-2').on('click', function () {
             $.confirm({
-                title: 'Entre com o período',
+                title: 'Entre com seus dados',
                 content: '' +
                 '<form action="teste.php" class="formName">' +
-                '<div class="form-group">' +
-                '<label>Entre com a data de início</label>' +
-                '<input type="date" placeholder="Data de ínicio" class="name form-control" required />' +
-                '<label>Entre com a data de fechamento</label>' +
-                '<input type="date" placeholder="Data de final" id = "teste" class="name form-control" required />' +
-                '</div>' +
+                  '<div class="form-group">' +
+                    '<label>Entre com seu SIAPE</label>' +
+                    '<input type="text" class="name form-control" required="required" name="text" placeholder="SIAPE" pattern="[0-9]+$" />'+
+                    '<label>Nome e Sobrenome</label>' +
+                    '<input type="text" class="name form-control" required="required" name="text" placeholder="NOME" pattern="[a-z]+$" />'+
+                    '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>' +
+                    '<input type="text" class="name form-control" required="required" name="text" placeholder="NOME" pattern="[0-9]{5}-[0-9]{5}+$" /> '+
+                    '<label>Entre com a data de início</label>' +
+                    '<input type="date" placeholder="Data de ínicio" class="name form-control" required />' +
+                    '<label>Entre com a data de fechamento</label>' +
+                    '<input type="date" placeholder="Data de final" id = "teste" class="name form-control" required />' +
+                  '</div>' +  
                 '</form>',
                 theme: 'modern',
                 animation: 'scale',
@@ -181,6 +187,10 @@
                     });
                 }
             });
+        });
+
+        $(document).ready(function(){
+          $('[data-toggle="popover"]').popover(); 
         });
     </script>
   </body>
