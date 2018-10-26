@@ -142,43 +142,96 @@
             $.confirm({
                 title: 'Entre com seus dados',
                 content: '' +
-                '<form action="teste.php" class="formName">' +
-                  '<div class="form-group">' +
-                    '<label>Entre com seu SIAPE</label>' +
-                    '<input type="text" class="name form-control" required="required" name="text" placeholder="SIAPE" pattern="[0-9]+$" />'+
-                    '<label>Nome e Sobrenome</label>' +
-                    '<input type="text" class="name form-control" required="required" name="text" placeholder="NOME" pattern="[a-z]+$" />'+
-                    '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>' +
-                    '<input type="text" class="name form-control" required="required" name="text" placeholder="NOME" pattern="[0-9]{5}-[0-9]{5}+$" /> '+
-                    '<label>Entre com a data de início</label>' +
-                    '<input type="date" placeholder="Data de ínicio" class="name form-control" required />' +
-                    '<label>Entre com a data de fechamento</label>' +
-                    '<input type="date" placeholder="Data de final" id = "teste" class="name form-control" required />' +
-                  '</div>' +  
+                '<form action="teste.php" class="formName">'+
+                  '<div class="form-group">'+
+                    '<label>Entre com seu SIAPE</label>'+
+                    '<input type="text" class="name form-control" required="required" id = "siape" name="text" placeholder="SIAPE" pattern="[0-9]+$" />'+
+                    '<label>Nome e Sobrenome</label>'+
+                    '<input type="text" class="name form-control" required="required" name="text" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
+                    '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>'+
+                    '<input type="text" class="name form-control" required="required" name="text" id = "dia" placeholder="Ex: 31420-51420" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /> '+
+                    '<label>Entre com a data de início</label>'+
+                    '<input type="date" placeholder="Data de ínicio" class="name form-control" id = "periodo1" required />'+
+                    '<label>Entre com a data de fechamento</label>'+
+                    '<input type="date" placeholder="Data de final" id = "periodo2" class="name form-control" required />'+
+                    '<label>Arquivo .TXT</label>'+
+                    '<input type="file" class="name form-control" name="fileUp" id="file">'+
+                  '</div>'+  
                 '</form>',
                 theme: 'modern',
                 animation: 'scale',
                 icon: 'fa fa-smile-o',
                 type: 'green',
-                buttons: {
-                    formSubmit: {
+                buttons: 
+                {
+                    formSubmit: 
+                    {
                         text: 'Enviar',
                         btnClass: 'btn-blue',
-                        action: function () {
-                            var name = this.$content.find('.name').val();
-                            var name1 = this.$content.find('#teste').val();
-                            if (!name) {
+                        action: function () 
+                        {
+                            let siape = this.$content.find('#siape').val();
+                            let name = this.$content.find('#name').val();
+                            let dia = this.$content.find('#dia').val();
+                            let per1 = this.$content.find('#periodo1').val();
+                            let per2 = this.$content.find('#periodo2').val();
+                            let file = this.$content.find('#file').val();
+                            
+                            if (!siape) 
+                            {
+                                $.alert('Siape inválido');
+                                return false;
+                            }
+
+                            if (!name) 
+                            {
                                 $.alert('Data inválida');
                                 return false;
                             }
-                            $.alert('A data que ele entrou é:  ' + name + " DATA FIM: " + name1);
+
+                            if (!dia) 
+                            {
+                                $.alert('Horas e dias inválidos');
+                                return false;
+                            }
+
+                            if (!per1) 
+                            {
+                                $.alert('Período inválido');
+                                return false;
+                            }
+
+                            if (!per2) 
+                            {
+                                $.alert('Período inválido');
+                                return false;
+                            }
+
+                            if (!file) 
+                            {
+                                $.alert('Arquivo inválido');
+                                return false;
+                            }
+                            else
+                            {
+                              $('input:file').change(function (e) 
+                              {
+                                  let type = this.files[0].type;
+
+                                  console.log(this.files[0].type);
+                              })
+                            }
+                            
+                            //$.alert('A data que ele entrou é:  ' + name + " DATA FIM: " + dia);
                         }
                     },
-                    cancelar: function () {
+                    cancelar: function () 
+                    {
                         //close
                     },
                 },
-                onContentReady: function () {
+                onContentReady: function () 
+                {
                     // you can bind to the form
                     var jc = this;
                     this.$content.find('form').on('submit', function (e) { // if the user submits the form by pressing enter in the field.
