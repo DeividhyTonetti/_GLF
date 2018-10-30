@@ -4,14 +4,18 @@
     
     class Csv
     {
-        public function importar()
+        public function importar($archive)
         {
 
             $xls = new Xls();
             $meuArray = Array();
             $i = 0;
-            
-            $file = fopen('../view/upload/relatorio.txt', 'r');
+            $dir = "../view/upload/txt/";
+           
+            if (move_uploaded_file($archive["tmp_name"], $dir.$archive["name"]))
+            { 
+                $file = fopen($dir.$archive["name"], 'r');
+            }
 
             while(($line = fgetcsv($file, 1000, "*")) !== false)
             {

@@ -243,16 +243,16 @@
         {
           $archiveName = trim($archiveName);
 
-           //Forço um donwload no formato xls
+            //Forço um donwload no formato xls
 
-          header('Content-Type: application/vnd.ms-excel');
-          header("Content-Disposition: attachment; filename=\"{$archiveName}\".xls" );
-          header('Cache-Control: max-age=0');
+            //header('Content-Type: application/vnd.ms-excel');
+            //header("Content-Disposition: attachment; filename=\"{$archiveName}\".xls" );
+            //header('Cache-Control: max-age=0');
 
-          $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-          $writer->save('php://output'); 
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+            $writer->save('..\view\upload\excel'.DIRECTORY_SEPARATOR.$archiveName.'.xls'); 
           
-          exit;
+            exit;
         }
     }
 

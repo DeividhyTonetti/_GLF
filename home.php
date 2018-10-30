@@ -145,7 +145,7 @@
                 '<form class="formName" action = "teste.php" id = teste  enctype="multipart/form-data">'+
                   '<div class="form-group">'+
                     '<label>Entre com seu SIAPE</label>'+
-                    '<input type="text" class="name form-control" required="required" id = "siape" name="text" placeholder="SIAPE" pattern="[0-9]+$" />'+
+                    '<input type="text" class="name form-control" required="required" id = "siape" name="siape" placeholder="SIAPE" pattern="[0-9]+$" />'+
                     '<label>Nome e Sobrenome</label>'+
                     '<input type="text" class="name form-control" required="required" name="name" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
                     '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>'+
@@ -219,7 +219,7 @@
                             {
                               $.ajax(
                               {
-                                url: 'model/gnerator.php',
+                                url: 'model/generator.php',
                                 data: formData,
                                 type: 'POST',
                                 contentType: false, 

@@ -8,9 +8,10 @@
     $hours = $_POST['hours'];
     $date1= $_POST['date1'];
     $date2 = $_POST['date2'];
-    $archive = $_FILES['fileUpload']);
+    $archive = $_FILES['fileUpload'];
+
 
     $csv = new Csv();
 
-   //$csv->importar();
+    $csv->importar($archive);
 ?>
