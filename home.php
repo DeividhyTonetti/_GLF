@@ -142,20 +142,20 @@
             $.confirm({
                 title: 'Entre com seus dados',
                 content: '' +
-                '<form action="teste.php" class="formName">'+
+                '<form class="formName" action = "teste.php" id = teste  enctype="multipart/form-data">'+
                   '<div class="form-group">'+
                     '<label>Entre com seu SIAPE</label>'+
                     '<input type="text" class="name form-control" required="required" id = "siape" name="text" placeholder="SIAPE" pattern="[0-9]+$" />'+
                     '<label>Nome e Sobrenome</label>'+
-                    '<input type="text" class="name form-control" required="required" name="text" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
+                    '<input type="text" class="name form-control" required="required" name="name" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
                     '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>'+
-                    '<input type="text" class="name form-control" required="required" name="text" id = "dia" placeholder="Ex: 31420-51420" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /> '+
+                    '<input type="text" class="name form-control" required="required" name="hours" id = "dia" placeholder="Ex: 31420-51420" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /> '+
                     '<label>Entre com a data de início</label>'+
-                    '<input type="date" placeholder="Data de ínicio" class="name form-control" id = "periodo1" required />'+
+                    '<input type="date" placeholder="Data de ínicio" name = "date1" class="name form-control" id = "periodo1" required />'+
                     '<label>Entre com a data de fechamento</label>'+
-                    '<input type="date" placeholder="Data de final" id = "periodo2" class="name form-control" required />'+
+                    '<input type="date" placeholder="Data de final" id = "periodo2" name = "date2" class="name form-control" required />'+
                     '<label>Arquivo .TXT</label>'+
-                    '<input type="file" class="name form-control" name="fileUp" id="file">'+
+                    '<input type="file" class="name form-control" name="fileUpload" id="file">'+
                   '</div>'+  
                 '</form>',
                 theme: 'modern',
@@ -177,6 +177,9 @@
                             let per2 = this.$content.find('#periodo2').val();
                             let file = this.$content.find('#file').val();
                             
+                            var form = $('form')[0]; // You need to use standard javascript object here
+                            var formData = new FormData(form);
+
                             if (!siape) 
                             {
                                 $.alert('Siape inválido');
@@ -185,7 +188,7 @@
 
                             if (!name) 
                             {
-                                $.alert('Data inválida');
+                                $.alert('Nome inválida');
                                 return false;
                             }
 
@@ -214,14 +217,20 @@
                             }
                             else
                             {
-                              $('input:file').change(function (e) 
+                              $.ajax(
                               {
-                                  let type = this.files[0].type;
-
-                                  console.log(this.files[0].type);
-                              })
-                            }
-                            
+                                url: 'model/gnerator.php',
+                                data: formData,
+                                type: 'POST',
+                                contentType: false, 
+                                processData: false, 
+                                
+                                success: function(msg)
+                                {
+                                  alert(msg);
+                                }
+                              });
+                            }                  
                             //$.alert('A data que ele entrou é:  ' + name + " DATA FIM: " + dia);
                         }
                     },
