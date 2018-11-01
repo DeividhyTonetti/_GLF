@@ -212,10 +212,8 @@
             $spreadsheet->getActiveSheet()->mergeCells('AO'.$i.':AQ'.$i);
             $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         
-           
-
             //Insiro os dados na tabela
-            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: ');
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: '.$hours);
             $spreadsheet->getActiveSheet()->setCellValue('F'.$j, 'Chefe do Departamento');
             $spreadsheet->getActiveSheet()->setCellValue('I'.$j, 'Professor(es):'.$siape.' - '. $name);
             
