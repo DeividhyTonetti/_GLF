@@ -227,7 +227,37 @@
                                 
                                 success: function(msg)
                                 {
-                                  alert(msg);
+                                  $.confirm(
+                                  {
+                                    title: '<center>Escolha a disciplina!</center>',
+                                    content: msg,
+                                    type: 'blue',
+                                    typeAnimated: true,
+                                    buttons: 
+                                    {
+                                        baixar: 
+                                        {
+                                            text: 'Baixar',
+                                            btnClass: 'btn-blue',
+                                            useBootstrap: true,
+                                            animation: 'news',
+                                            closeAnimation: 'news',
+
+                                            action: function()
+                                            {
+
+                                            }
+                                        },
+                                        close: function () 
+                                        {
+
+                                        }
+                                    },
+                                    action: function()
+                                    {
+                                      console.log(msg);
+                                    }
+                                  });
                                 }
                               });
                             }                  
@@ -239,15 +269,6 @@
                         //close
                     },
                 },
-                onContentReady: function () 
-                {
-                    // you can bind to the form
-                    var jc = this;
-                    this.$content.find('form').on('submit', function (e) { // if the user submits the form by pressing enter in the field.
-                        e.preventDefault();
-                        jc.$$formSubmit.trigger('click'); // reference the button and click it
-                    });
-                }
             });
         });
 

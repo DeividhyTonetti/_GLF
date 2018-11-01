@@ -10,8 +10,7 @@
     $date2 = $_POST['date2'];
     $archive = $_FILES['fileUpload'];
 
-
     $csv = new Csv();
 
-    $csv->importar($archive);
+    $csv->importar($siape, $name, $hours, $date1, $date2, $archive);
 ?>

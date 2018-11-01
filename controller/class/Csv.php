@@ -4,12 +4,9 @@
     
     class Csv
     {
-        public function importar($archive)
+        public function importar($siape, $name, $hours, $date1, $date2, $archive)
         {
-
-            $xls = new Xls();
             $meuArray = Array();
-            $i = 0;
             $dir = "../view/upload/txt/";
            
             if (move_uploaded_file($archive["tmp_name"], $dir.$archive["name"]))
@@ -39,7 +36,44 @@
                     ];
                 } 
             }
-            
+
+            $html = '
+            <!DOCTYPE html>
+                <html lang="PT-BR" >
+        
+                    <head>
+                        <meta charset="UTF-8">
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+                        <link rel="stylesheet" href="view/css/style.css">
+                    </head>
+                    <body>
+                        <form class="form">';
+                        foreach ($disciplina as $key => $value) 
+                        {
+                            $html.='
+                            <div class="inputGroup">
+                                <input id="option'.$key.'" name="option'.$key.'" type="checkbox"/>
+                                <label for="option'.$key.'">'.$disciplina[$key].'</label>
+                            </div>
+                            ';
+                        }
+
+                        $html .= '</form>
+                        <div style="max-width: 600px; margin: 24px auto;">
+                        <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">           
+                    </body>              
+            </html>
+          ';
+          
+          echo $html;
+          $this->tratarDados($disciplina, $data, $siape, $name, $hours, $date1, $date2, $archive);
+        }
+
+        public function tratarDados($disciplina, $data, $siape, $name, $hours, $date1, $date2, $archive)
+        {  
+            $xls = new Xls();
+            $i = 0;
+
             foreach ($data as $key => $value) 
             {   
                 if(empty($data[$key+1]['numDis']))
@@ -61,7 +95,7 @@
                         'nomeAlu' => $data[$key]['nomeAlu']
                     ];
 
-                    $xls->printTable($dataFinal);
+                    $xls->printTable($dataFinal, $siape, $name, $hours, $date1, $date2);
                     $dataFinal = array();
                     $i++;
                 }

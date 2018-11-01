@@ -9,7 +9,7 @@
     {
 
       //criar metodos pivados para alterar as informações de size e style word
-        public function printTable($data)
+        public function printTable($data, $siape, $name, $hours, $date1, $date2)
         {
             $now = new Date();
 
@@ -217,7 +217,7 @@
             //Insiro os dados na tabela
             $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: ');
             $spreadsheet->getActiveSheet()->setCellValue('F'.$j, 'Chefe do Departamento');
-            $spreadsheet->getActiveSheet()->setCellValue('I'.$j, 'Professor(es):'.' SIAPE'.' - NOME');
+            $spreadsheet->getActiveSheet()->setCellValue('I'.$j, 'Professor(es):'.$siape.' - '. $name);
             
             $j++;
             $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Local: ');
