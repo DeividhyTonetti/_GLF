@@ -236,6 +236,10 @@
             $sheet = $spreadsheet->getActiveSheet();
             $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
+            //-----------********************************CRIA UMA NOVA Planílha*****************************---------------
+            //$worksheet1 = $spreadsheet->createSheet();
+            //$worksheet1->setTitle('Nova planilha');
+
             $this->donwload($spreadsheet, $dataFinal[$key]['disciplina']);     
         }
 
