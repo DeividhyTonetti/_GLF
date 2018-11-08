@@ -4,8 +4,8 @@
     
     class Csv
     {
-        public function importar($siape, $name, $hours, $date1, $date2, $archive)
-        {
+        public function importar($siape, $name, $date1, $date2, $archive)
+        {   
             $meuArray = Array();
             $dir = "../view/upload/txt/";
            
@@ -49,7 +49,8 @@
                     <body>
                         <form class="form">';
                         foreach ($disciplina as $key => $value) 
-                        {
+                        {  
+                            $_SESSION['options'] = "option".$key;
                             $html.='
                             <div class="inputGroup">
                                 <input id="option'.$key.'" name="option'.$key.'" type="checkbox"/>
@@ -58,18 +59,22 @@
                             ';
                         }
 
-                        $html .= '</form>
+                        $html .= '<input type="hidden" name="tratar" value="tratar">
+                            <input type="hidden" name="importar" value="">
+                        </form>
                         <div style="max-width: 600px; margin: 24px auto;">
                         <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">           
                     </body>              
             </html>
           ';
-          
+        
+          $_SESSION['data'] = $data;
+          $_SESSION['disciplina'] = $disciplina;
           echo $html;
-          $this->tratarDados($disciplina, $data, $siape, $name, $hours, $date1, $date2, $archive);
+          //$this->tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive);
         }
 
-        public function tratarDados($disciplina, $data, $siape, $name, $hours, $date1, $date2, $archive)
+        public function tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive)
         {  
             $xls = new Xls();
             $i = 0;
@@ -95,7 +100,7 @@
                         'nomeAlu' => $data[$key]['nomeAlu']
                     ];
 
-                    $xls->printTable($dataFinal, $siape, $name, $hours, $date1, $date2);
+                    $xls->printTable($dataFinal, $siape, $name, $date1, $date2);
                     $dataFinal = array();
                     $i++;
                 }
@@ -110,8 +115,6 @@
                     ];
                 }
             }
-            
-            fclose($file);
         }
     }
 

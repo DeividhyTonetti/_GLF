@@ -9,9 +9,10 @@
     {
 
       //criar metodos pivados para alterar as informações de size e style word
-        public function printTable($data, $siape, $name, $hours, $date1, $date2)
+        public function printTable($data, $siape, $name, $date1, $date2)
         {
-            $now = new Date();
+            $newDate = new Date();
+            $vectorDate = $newDate->intervalo($date1, $date2);
 
             $arquivo = 'planilha.xls';
             $i = 8;
@@ -74,7 +75,45 @@
               $spreadsheet->getActiveSheet()->mergeCells('A1:E5');
               $spreadsheet->getActiveSheet()->mergeCells('A6:B6');
               $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
+
               $spreadsheet->getActiveSheet()->mergeCells('F4:F7');
+              $spreadsheet->getActiveSheet()->mergeCells('G4:G7');
+              $spreadsheet->getActiveSheet()->mergeCells('H4:H7');
+              $spreadsheet->getActiveSheet()->mergeCells('I4:I7');
+              $spreadsheet->getActiveSheet()->mergeCells('J4:J7');
+              $spreadsheet->getActiveSheet()->mergeCells('K4:K7');
+              $spreadsheet->getActiveSheet()->mergeCells('L4:L7');
+              $spreadsheet->getActiveSheet()->mergeCells('M4:M7');
+              $spreadsheet->getActiveSheet()->mergeCells('N4:N7');
+              $spreadsheet->getActiveSheet()->mergeCells('O4:O7');
+              $spreadsheet->getActiveSheet()->mergeCells('P4:P7');
+              $spreadsheet->getActiveSheet()->mergeCells('Q4:Q7');
+              $spreadsheet->getActiveSheet()->mergeCells('R4:R7');
+              $spreadsheet->getActiveSheet()->mergeCells('S4:S7');
+              $spreadsheet->getActiveSheet()->mergeCells('T4:T7');
+              $spreadsheet->getActiveSheet()->mergeCells('U4:U7');
+              $spreadsheet->getActiveSheet()->mergeCells('V4:V7');
+              $spreadsheet->getActiveSheet()->mergeCells('W4:W7');
+              $spreadsheet->getActiveSheet()->mergeCells('X4:X7');
+              $spreadsheet->getActiveSheet()->mergeCells('Y4:Y7');
+              $spreadsheet->getActiveSheet()->mergeCells('Z4:Z7');
+              $spreadsheet->getActiveSheet()->mergeCells('AA4:AA7');
+              $spreadsheet->getActiveSheet()->mergeCells('AB4:AB7');
+              $spreadsheet->getActiveSheet()->mergeCells('AC4:AC7');
+              $spreadsheet->getActiveSheet()->mergeCells('AD4:AD7');
+              $spreadsheet->getActiveSheet()->mergeCells('AE4:AE7');
+              $spreadsheet->getActiveSheet()->mergeCells('AF4:AF7');
+              $spreadsheet->getActiveSheet()->mergeCells('AG4:AG7');
+              $spreadsheet->getActiveSheet()->mergeCells('AH4:AH7');
+              $spreadsheet->getActiveSheet()->mergeCells('AI4:AI7');
+              $spreadsheet->getActiveSheet()->mergeCells('AJ4:AJ7');
+              $spreadsheet->getActiveSheet()->mergeCells('AK4:AK7');
+              $spreadsheet->getActiveSheet()->mergeCells('AL4:AL7');
+              $spreadsheet->getActiveSheet()->mergeCells('AM4:AM7');
+              $spreadsheet->getActiveSheet()->mergeCells('AN4:AN7');
+              $spreadsheet->getActiveSheet()->mergeCells('AO4:AO7');
+              $spreadsheet->getActiveSheet()->mergeCells('AP4:AP7');
+
               $spreadsheet->getActiveSheet()->mergeCells('F3:AQ3');
               
               //Insiro dados nas células
@@ -90,7 +129,48 @@
               $spreadsheet->getActiveSheet()->setCellValue('C7', 'Aluno');
               $spreadsheet->getActiveSheet()->setCellValue('D7', 'Nota');
               $spreadsheet->getActiveSheet()->setCellValue('E7', 'Freq.');
-              $spreadsheet->getActiveSheet()->setCellValue('F4', 'TESTE');
+
+              // Continuo inserindo os dados, mas agora faço o tratamento para a data
+              
+              $spreadsheet->getActiveSheet()->setCellValue('F4',  $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('G4', $vectorDate['1']);
+              $spreadsheet->getActiveSheet()->setCellValue('H4', $vectorDate['2']);
+              $spreadsheet->getActiveSheet()->setCellValue('I4', $vectorDate['3']);
+              $spreadsheet->getActiveSheet()->setCellValue('J4', $vectorDate['4']);
+              $spreadsheet->getActiveSheet()->setCellValue('K4', $vectorDate['5']);
+              $spreadsheet->getActiveSheet()->setCellValue('L4', $vectorDate['6']);
+              $spreadsheet->getActiveSheet()->setCellValue('M4', $vectorDate['7']);
+              $spreadsheet->getActiveSheet()->setCellValue('N4', $vectorDate['8']);
+              $spreadsheet->getActiveSheet()->setCellValue('O4', $vectorDate['9']);
+              $spreadsheet->getActiveSheet()->setCellValue('P4', $vectorDate['10']);
+              $spreadsheet->getActiveSheet()->setCellValue('Q4', $vectorDate['11']);
+              $spreadsheet->getActiveSheet()->setCellValue('R4', $vectorDate['12']);
+              $spreadsheet->getActiveSheet()->setCellValue('S4', $vectorDate['13']);
+              $spreadsheet->getActiveSheet()->setCellValue('T4', $vectorDate['14']);
+              $spreadsheet->getActiveSheet()->setCellValue('U4', $vectorDate['15']);
+              $spreadsheet->getActiveSheet()->setCellValue('V4', $vectorDate['16']);
+              $spreadsheet->getActiveSheet()->setCellValue('W4', $vectorDate['17']);
+              $spreadsheet->getActiveSheet()->setCellValue('X4', $vectorDate['18']);
+              $spreadsheet->getActiveSheet()->setCellValue('Y4', $vectorDate['19']);
+              $spreadsheet->getActiveSheet()->setCellValue('Z4', $vectorDate['20']);
+
+              $spreadsheet->getActiveSheet()->setCellValue('AA4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AB4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AC4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AD4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AE4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AF4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AG4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AH4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AI4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AJ4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AK4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AL4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AM4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AN4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AO4', $vectorDate['0']);
+              $spreadsheet->getActiveSheet()->setCellValue('AP4', $vectorDate['0']);
+              
 
             if($i % 2 == 1)
             {
@@ -161,7 +241,7 @@
               $spreadsheet->getActiveSheet()->getStyle('F3:AQ3')->applyFromArray($styleArray);
 
               //alguns styles estou usando fora do vetor -- mas seria de suma importância fazer dentro de um vetor
-              $spreadsheet->getActiveSheet()->getStyle('F4:F7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+              $spreadsheet->getActiveSheet()->getStyle('F4:AP7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
               $spreadsheet->getActiveSheet()->getStyle('AQ4:AQ7')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
               $spreadsheet->getActiveSheet()->getStyle('AQ5:AQ7')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
               $spreadsheet->getActiveSheet()->getStyle('AQ5')->getFont()->setUnderline(true);
@@ -213,7 +293,7 @@
             $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AQ'.$i)->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         
             //Insiro os dados na tabela
-            $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: '.$hours);
+            //$spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Horário: '.$hours);
             $spreadsheet->getActiveSheet()->setCellValue('F'.$j, 'Chefe do Departamento');
             $spreadsheet->getActiveSheet()->setCellValue('I'.$j, 'Professor(es):'.$siape.' - '. $name);
             
@@ -222,7 +302,7 @@
 
             $j++;
             $spreadsheet->getActiveSheet()->setCellValue('A'.$j, 'Mensagem: _Matricula Inicial.');
-            $spreadsheet->getActiveSheet()->setCellValue('AO'.$j, $now->dateNow());
+            $spreadsheet->getActiveSheet()->setCellValue('AO'.$j, $newDate->dateNow());
 
             $j++;
             $spreadsheet->getActiveSheet()->setCellValue('A'.$j, '                  _Não permita a presença de alunos não relaciondos, salvos autorizados pelo DAE');

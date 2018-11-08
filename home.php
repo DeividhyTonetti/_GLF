@@ -148,14 +148,13 @@
                     '<input type="text" class="name form-control" required="required" id = "siape" name="siape" placeholder="SIAPE" pattern="[0-9]+$" />'+
                     '<label>Nome e Sobrenome</label>'+
                     '<input type="text" class="name form-control" required="required" name="name" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
-                    '<label>Entre com o horário das aulas e os dias</label><a href = "#" data-toggle="popover" title="Precisa de ajuda?" data-content="Some content inside the popover"><img src="https://png.icons8.com/metro/50/000000/question-mark.png" width = "20px" height = "20px"></a>'+
-                    '<input type="text" class="name form-control" required="required" name="hours" id = "dia" placeholder="Ex: 31420-51420" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /> '+
                     '<label>Entre com a data de início</label>'+
                     '<input type="date" placeholder="Data de ínicio" name = "date1" class="name form-control" id = "periodo1" required />'+
                     '<label>Entre com a data de fechamento</label>'+
                     '<input type="date" placeholder="Data de final" id = "periodo2" name = "date2" class="name form-control" required />'+
                     '<label>Arquivo .TXT</label>'+
                     '<input type="file" class="name form-control" name="fileUpload" id="file">'+
+                    '<input type="hidden" name="importar" value="import">'+
                   '</div>'+  
                 '</form>',
                 theme: 'modern',
@@ -172,7 +171,6 @@
                         {
                             let siape = this.$content.find('#siape').val();
                             let name = this.$content.find('#name').val();
-                            let dia = this.$content.find('#dia').val();
                             let per1 = this.$content.find('#periodo1').val();
                             let per2 = this.$content.find('#periodo2').val();
                             let file = this.$content.find('#file').val();
@@ -192,12 +190,6 @@
                                 return false;
                             }
 
-                            if (!dia) 
-                            {
-                                $.alert('Horas e dias inválidos');
-                                return false;
-                            }
-
                             if (!per1) 
                             {
                                 $.alert('Período inválido');
@@ -207,6 +199,12 @@
                             if (!per2) 
                             {
                                 $.alert('Período inválido');
+                                return false;
+                            }
+
+                            if (new Date(per1).getTime() >= new Date(per2).getTime()) 
+                            {
+                                $.alert('Perído inicial inválido');
                                 return false;
                             }
 
@@ -233,6 +231,7 @@
                                     content: msg,
                                     type: 'blue',
                                     typeAnimated: true,
+                                    
                                     buttons: 
                                     {
                                         baixar: 
@@ -242,10 +241,26 @@
                                             useBootstrap: true,
                                             animation: 'news',
                                             closeAnimation: 'news',
-
+                                            content: 'url: model/generator.php',
+                                            
                                             action: function()
                                             {
+                                              var form = $('form')[0]; // You need to use standard javascript object here
+                                              var formData = new FormData(form);
 
+                                              $.ajax(
+                                              {
+                                                url: 'model/generator.php',
+                                                data: formData,
+                                                type: 'POST',
+                                                contentType: false, 
+                                                processData: false, 
+                                                
+                                                success: function(msg)
+                                                { 
+                                                  console.log(msg);
+                                                }
+                                              });
                                             }
                                         },
                                         close: function () 
@@ -255,13 +270,12 @@
                                     },
                                     action: function()
                                     {
-                                      console.log(msg);
+
                                     }
                                   });
                                 }
                               });
                             }                  
-                            //$.alert('A data que ele entrou é:  ' + name + " DATA FIM: " + dia);
                         }
                     },
                     cancelar: function () 
@@ -270,10 +284,6 @@
                     },
                 },
             });
-        });
-
-        $(document).ready(function(){
-          $('[data-toggle="popover"]').popover(); 
         });
     </script>
   </body>

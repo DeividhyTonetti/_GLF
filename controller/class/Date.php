@@ -11,26 +11,23 @@
             return $now->format( "d/m/Y H:i:s" );
         }
 
-        public function intervalo($data1, $data2)
+        public function intervalo($date1, $date2)
         {
-            $data1 = new DateTime($data1);
-            $data2 = new DateTime($data2);
+            $date1 = new DateTime($date1);
+            $date2 = new DateTime($date2);
             
-            for ($i=$data1=>format("Y/m/d"); $i <= $data1=>format("Y/m/d"); $i = $data1->modify('+1 weekday')) 
+            while($date1->format("Y/m/d") < $date2->format("Y/m/d")) 
             {  
-              $dataFinal[] = 
-              [   
-                  'disciplina' => $data[$key]['disciplina'],
-                  'numDis' => $data[$key]['numDis'],
-                  'matricula' => $data[$key]['matricula'],
-                  'nomeAlu' => $data[$key]['nomeAlu']
-              ];
+                $date1->modify('+7 day');
+                $vector[] = $date1->format( "d/m/Y" );
             }
 
-            $data->modify('+1 ');
-            echo $data->format('d-m-Y H:i:s');
+            return $vector;
+        }
 
-            return $now->format( "d/m/Y H:i:s" );
+        private function semana()
+        {
+            $dias = array (0 => "Domingo", 1 => "Segunda-Feira",2 => "Terça-Feira",3 => "Quarta-Feira",4 => "Quinta-Feira",5 => "Sexta-Feira",6 => "Sábado");
         }
     }
 
