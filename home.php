@@ -231,6 +231,8 @@
                                     content: msg,
                                     type: 'blue',
                                     typeAnimated: true,
+                                    theme: 'modern',
+                                    animation: 'rotate',
                                     
                                     buttons: 
                                     {
@@ -285,6 +287,62 @@
                 },
             });
         });
+
+        function mudarEstado0(el) 
+        {
+          var display = document.getElementById(el).style.display;
+            
+          if(document.getElementById('option0').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+
+        function mudarEstado1(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option1').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+
+        function mudarEstado2(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option2').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+
+        function mudarEstado3(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option3').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }        
     </script>
   </body>
 </html>

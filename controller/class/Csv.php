@@ -53,8 +53,12 @@
                             $_SESSION['options'] = "option".$key;
                             $html.='
                             <div class="inputGroup">
-                                <input id="option'.$key.'" name="option'.$key.'" type="checkbox"/>
+                                <input id="option'.$key.'" name="option'.$key.'" type="checkbox" onclick="mudarEstado'.$key.'('."'minhaDiv".$key."'".')"/>
                                 <label for="option'.$key.'">'.$disciplina[$key].'</label>
+                            </div>
+                            <div id = "minhaDiv'.$key.'" style = "display: none;"">
+                                <label>Entre com o Dia e a Hora: </label>
+                                <input type = "text" name = "hours" value = "">
                             </div>
                             ';
                         }

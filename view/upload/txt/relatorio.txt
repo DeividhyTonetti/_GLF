@@ -1,7 +1,7 @@
 Alunos_Matriculados
 
 20182 ; DEC7131; 04652  ;    20182 ;***  _________________________________________________
-20182 ; DEC7131; 04652  ;    20182 ;*** Sistemas Operacionais                                                                               ;;;data: 02-10-2018
+20182 ; DEC7131; 04652  ;    20182 ;*** mudei o nome                                                                               ;;;data: 02-10-2018
 20182 ; DEC7131; 04652  ; 14103207 ;Leonardo Paulino Nunes                            ;(652)-TECNOLOGIAS DA INFORMA플O E COMUNICA플O (noturno)  ;leo_paulino_nunes@hotmail.com
 20182 ; DEC7131; 04652  ; 14104262 ;Lucas Pilar Xavier                                ;(652)-TECNOLOGIAS DA INFORMA플O E COMUNICA플O (noturno)  ;lucaspx93@gmail.com
 20182 ; DEC7131; 04652  ; 14204368 ;Marcio Marques da Silva                           ;(652)-TECNOLOGIAS DA INFORMA플O E COMUNICA플O (noturno)  ;marciomarques2005@hotmail.com

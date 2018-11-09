@@ -314,10 +314,127 @@
             $sheet = $spreadsheet->getActiveSheet();
             $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
-            //-----------********************************CRIA UMA NOVA Planílha*****************************---------------
-            //$worksheet1 = $spreadsheet->createSheet();
-            //$worksheet1->setTitle('Nova planilha');
+            //-----------********************************CRIA UMA NOVA ABA*****************************---------------
+            $worksheet1 = $spreadsheet->createSheet();
+            $drawing1 = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            
+            $worksheet1->setTitle('Verso');
+            $worksheet1->getTabColor()->setRGB('FFFFFF');
+            $spreadsheet->setActiveSheetIndex(1);
+            
+            //Inserimos a imagem
+            $drawing1->setName('logoUFSC2');
+            $drawing1->setDescription('logoUFSC2');
+            $drawing1->setPath('../view/img/Universidade2.png');
+            $drawing1->setCoordinates('A1');
+            $drawing1->getShadow()->setVisible(true);
 
+            //---------------------------TABELA 1 NOVA ABA------------------------------
+
+            //Mesclo as células
+            $spreadsheet->getActiveSheet()->mergeCells('A1:K5');
+            $spreadsheet->getActiveSheet()->mergeCells('A6:C6');
+            $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
+            $spreadsheet->getActiveSheet()->mergeCells('F6:I6');
+            $spreadsheet->getActiveSheet()->mergeCells('J6:K6');
+            $spreadsheet->getActiveSheet()->mergeCells('A7:B7');
+            $spreadsheet->getActiveSheet()->mergeCells('C7:K7');
+
+            //Insiro dados nas células
+            $spreadsheet->getActiveSheet()->setCellValue('A6', 'Disciplina: ');
+            $spreadsheet->getActiveSheet()->setCellValue('D6', 'Turma: ');
+            $spreadsheet->getActiveSheet()->setCellValue('F6', 'Horas Aula: ');
+            $spreadsheet->getActiveSheet()->setCellValue('J6', 'Aulas: ');
+            $spreadsheet->getActiveSheet()->setCellValue('C7', 'CONTROLE DE AVALIAÇÕES: ');
+            $spreadsheet->getActiveSheet()->setCellValue('A8', 'Ordem');
+            $spreadsheet->getActiveSheet()->setCellValue('B8', 'Matrícula');
+            $spreadsheet->getActiveSheet()->setCellValue('C8', '1');
+            $spreadsheet->getActiveSheet()->setCellValue('D8', '2');
+            $spreadsheet->getActiveSheet()->setCellValue('E8', '3');
+            $spreadsheet->getActiveSheet()->setCellValue('F8', '4');
+            $spreadsheet->getActiveSheet()->setCellValue('G8', '5');
+            $spreadsheet->getActiveSheet()->setCellValue('H8', '6');
+            $spreadsheet->getActiveSheet()->setCellValue('I8', '7');
+            $spreadsheet->getActiveSheet()->setCellValue('J8', '8');
+            $spreadsheet->getActiveSheet()->setCellValue('K8', 'N. Final');
+
+            // Costruimos um array para setar os estilos de linha, font, borda, cores, alinhamento etc..
+            
+            $styleTab1 = [
+                'font' => [
+                    'bold' => true,
+                ],
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' =>  \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ]
+                ]
+            ];
+
+            $styleTab2 = [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' =>  \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ]
+                ]
+            ];
+            
+            $spreadsheet->getActiveSheet()->getStyle('A6:C6')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFA0A0A0');
+            $spreadsheet->getActiveSheet()->getStyle('A6:K6')->applyFromArray($styleTab1);
+            $spreadsheet->getActiveSheet()->getStyle('C7:K7')->applyFromArray($styleTab1);
+            $spreadsheet->getActiveSheet()->getStyle('A8:K8')->applyFromArray($styleTab1);
+            $spreadsheet->getActiveSheet()->getStyle('A9:K46')->applyFromArray($styleTab2);
+            
+
+            //---------------------------TABELA 2 NOVA ABA------------------------------
+
+            //Mesclo as células
+            $spreadsheet->getActiveSheet()->mergeCells('N1:O1');
+            $spreadsheet->getActiveSheet()->mergeCells('M2:N2');
+            $spreadsheet->getActiveSheet()->mergeCells('M4:N4');
+            $spreadsheet->getActiveSheet()->mergeCells('M5:N5');
+            $spreadsheet->getActiveSheet()->mergeCells('N7:O7');
+            
+            //Insiro dados nas células
+            $spreadsheet->getActiveSheet()->setCellValue('N1', 'LISTA DE FREQUÊNCIA    -     Semestre   ');
+            $spreadsheet->getActiveSheet()->setCellValue('M3', 'Horário do Prof. para Atendimento aos Alunos (Extraclasse)');
+            $spreadsheet->getActiveSheet()->setCellValue('M4', 'Dia da semana: ');
+            $spreadsheet->getActiveSheet()->setCellValue('M5', 'Nome do Monitor: ');
+            $spreadsheet->getActiveSheet()->setCellValue('O3', 'Horários/Locais');
+            $spreadsheet->getActiveSheet()->setCellValue('O4', 'AQUI VAI O HORARIO');
+            $spreadsheet->getActiveSheet()->setCellValue('O5', 'AQUI VAI O LOCAL');
+            $spreadsheet->getActiveSheet()->setCellValue('M7', 'Datas');
+            $spreadsheet->getActiveSheet()->setCellValue('N7', 'Conteúdo Programático estabelecido no Plano de Ensino');
+
+            //Pegamos o Array anterior para estilizar alguns parametros
+            $spreadsheet->getActiveSheet()->getStyle('M7:O7')->applyFromArray($styleTab1);
+            
+            //Estilizmos (NEGRITO)
+            $spreadsheet->getActiveSheet()->getStyle('M3:N5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('O3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('O3:O5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('N1')->getFont()->setBold(true);
+            $spreadsheet->getActiveSheet()->getStyle('M8:O46')->applyFromArray($styleTab2); 
+
+
+            //---------------------------TABELA 3 NOVA ABA------------------------------
+
+            //Mesclo as células
+            $spreadsheet->getActiveSheet()->mergeCells('A48:B48');
+            $spreadsheet->getActiveSheet()->mergeCells('M48:N48');
+            $spreadsheet->getActiveSheet()->mergeCells('M49:N49');
+            $spreadsheet->getActiveSheet()->mergeCells('M50:N50');
+            $spreadsheet->getActiveSheet()->mergeCells('M51:N51');
+            $spreadsheet->getActiveSheet()->mergeCells('O48:O51');
+
+            $drawing1->setWorksheet($spreadsheet->getActiveSheet());
+            $spreadsheet->setActiveSheetIndex(0);
             $this->donwload($spreadsheet, $dataFinal[$key]['disciplina']);     
         }
 
