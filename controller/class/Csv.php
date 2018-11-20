@@ -25,11 +25,21 @@
                 {
                     $disciplina[] = $dados[0];
                 }
+                
+                if(is_numeric(filter_var($dados[0], FILTER_SANITIZE_NUMBER_INT)) and $dados[0] != "Alunos_Matriculados" and !empty($dados[0]) and $dados[0] != "  _________________________________________________")
+                {
+                    $semestreAno = $dados[0];
+                    $ano = substr($semestreAno, 0, 4);
+                    $semestre = substr($semestreAno, -2);
 
-                if(!empty($dados[2]) and !empty($dados[3]) and !empty($dados[4]))
+                    $semestre = $ano."/".$semestre;
+                }
+
+                if(!empty($dados[1]) and !empty($dados[2]) and !empty($dados[3]) and !empty($dados[4]))
                 {     
                     $data[] = 
                     [
+                        'nomeDis'=> $dados[1],
                         'numDis' => $dados[2],
                         'matricula' => $dados[3],
                         'nomeAlu' => $dados[4]
@@ -74,6 +84,8 @@
         
           $_SESSION['data'] = $data;
           $_SESSION['disciplina'] = $disciplina;
+          $_SESSION['semestre'] = $semestre;
+
           echo $html;
           //$this->tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive);
         }
@@ -99,6 +111,7 @@
                     $dataFinal[] = 
                     [   
                         'disciplina' => $disciplina[$i],
+                        'nomeDis' => $data[$key]['nomeDis'],
                         'numDis' => $data[$key]['numDis'],
                         'matricula' => $data[$key]['matricula'],
                         'nomeAlu' => $data[$key]['nomeAlu']
@@ -113,6 +126,7 @@
                     $dataFinal[] = 
                     [   
                         'disciplina' => $disciplina[$i],
+                        'nomeDis' => $data[$key]['nomeDis'],
                         'numDis' => $data[$key]['numDis'],
                         'matricula' => $data[$key]['matricula'],
                         'nomeAlu' => $data[$key]['nomeAlu']
