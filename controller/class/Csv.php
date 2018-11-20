@@ -93,6 +93,7 @@
         public function tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive)
         {  
             $xls = new Xls();
+            $order = new Order();
             $i = 0;
 
             foreach ($data as $key => $value) 
@@ -117,6 +118,9 @@
                         'nomeAlu' => $data[$key]['nomeAlu']
                     ];
 
+                    $dataFinal = $order->orderVector($dataFinal);
+                    
+                    //var_dump($dataFinal);
                     $xls->printTable($dataFinal, $siape, $name, $date1, $date2);
                     $dataFinal = array();
                     $i++;
