@@ -399,6 +399,7 @@
             {
                 $spreadsheet->getActiveSheet()->setCellValue('A'.$j, $key);
                 $spreadsheet->getActiveSheet()->getStyle('A'.$j.':K'.$j)->applyFromArray($styleTab2);
+                $spreadsheet->getActiveSheet()->setCellValue('B'.$j, intval($dataFinal[$key]['matricula']));
                 
                 $j++;
             }

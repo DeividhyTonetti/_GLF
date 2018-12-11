@@ -7,7 +7,7 @@
             
             usort($dataFinal, array($this, "cmp"));
             
-            var_dump($dataFinal);
+            return $dataFinal;
         }
 
         private function cmp($a, $b) 

@@ -87,6 +87,7 @@
           $_SESSION['semestre'] = $semestre;
 
           echo $html;
+          
           //$this->tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive);
         }
 
@@ -118,9 +119,10 @@
                         'nomeAlu' => $data[$key]['nomeAlu']
                     ];
 
-                    $dataFinal = $order->orderVector($dataFinal);
                     
-                    //var_dump($dataFinal);
+                    var_dump($dataFinal);
+                    //$dataFinal = $order->orderVector($dataFinal);
+
                     $xls->printTable($dataFinal, $siape, $name, $date1, $date2);
                     $dataFinal = array();
                     $i++;

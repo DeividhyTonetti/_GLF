@@ -175,7 +175,7 @@
                             let per2 = this.$content.find('#periodo2').val();
                             let file = this.$content.find('#file').val();
                             
-                            var form = $('form')[0]; // You need to use standard javascript object here
+                            var form = $('form')[0]; 
                             var formData = new FormData(form);
 
                             if (!siape) 
