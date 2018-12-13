@@ -25,7 +25,7 @@
 
     if(!empty($_POST['tratar']))
     {
-        $csv->tratarDados($_SESSION['disciplina'], $_SESSION['data'], $_SESSION['siape'],  $_SESSION['name'], $_SESSION['date1'], $_SESSION['date2'], $_SESSION['fileUpload']);
+        $csv->tratarDados($_SESSION['disciplina'], $_SESSION['data'], $_SESSION['siape'],  $_SESSION['name'], $_SESSION['date1'], $_SESSION['date2'], $_SESSION['fileUpload'], $_POST['hours'], $_POST['hours1'], $_POST['op1'], $_POST['op2']);
         $tratar = "";
     }
 

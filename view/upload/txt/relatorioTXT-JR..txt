@@ -1,6 +1,30 @@
 Alunos_Matriculados
 
 20182 ; DEC7131; 04652  ;    20182 ;***  _________________________________________________
+20182 ; DEC7131; 04652  ;    20182 ;*** Coloquei                                                                              ;;;data: 02-10-2018
+20182 ; DEC7131; 04652  ; 14103207 ;Leonardo Paulino Nunes                            ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;leo_paulino_nunes@hotmail.com
+20182 ; DEC7131; 04652  ; 14104262 ;Lucas Pilar Xavier                                ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;lucaspx93@gmail.com
+20182 ; DEC7131; 04652  ; 14204368 ;Marcio Marques da Silva                           ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;marciomarques2005@hotmail.com
+20182 ; DEC7131; 04652  ; 14209149 ;Jakson Lucas Campos de Meira                      ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;jaksonlucas@outlook.com
+20182 ; DEC7131; 04652  ; 15104600 ;Ana Carolina Cardoso Machado                      ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;anacardosomachado@hotmail.com
+20182 ; DEC7131; 04652  ; 15203958 ;Marcela Schiaffino Morales de Franceschi          ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;marceladefranceschi@gmail.com
+20182 ; DEC7131; 04652  ; 16103405 ;Henrique Vefago Albino                            ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;henrique.vefago@grad.ufsc.br
+20182 ; DEC7131; 04652  ; 16103406 ;Hudison Dal Molin de Souza                        ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;hudisondms@gmail.com
+20182 ; DEC7131; 04652  ; 16104911 ;Patrick Elias Alexandre                           ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;patrickelias94@hotmail.com
+20182 ; DEC7131; 04652  ; 16104915 ;Robertson de Souza de Melo                        ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;robepalmeiras@hotmail.com
+20182 ; DEC7131; 04652  ; 16150575 ;João Paulo Marques Votri                          ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;jpaulo.votri@hotmail.com
+20182 ; DEC7131; 04652  ; 16202733 ;Natalia Maldaner                                  ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;natalia.maldaner@outlook.com
+20182 ; DEC7131; 04652  ; 16202734 ;Ramon de Brittos Souza                            ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;ramon_souza@hotmail.com
+20182 ; DEC7131; 04652  ; 16250602 ;Tiago Nunes                                       ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;tiago.engcompufsc@hotmail.com
+20182 ; DEC7131; 04652  ; 17102242 ;Artur Bendo Gonçalves                             ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;arturbendo27@gmail.com
+20182 ; DEC7131; 04652  ; 17102245 ;Eduardo de Vila                                   ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;eduardodevila1@hotmail.com
+20182 ; DEC7131; 04652  ; 17102263 ;Lucian Davila Pedro                               ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;luciandavilapedro@gmail.com
+20182 ; DEC7131; 04652  ; 17102273 ;Talita Gregory Nunes Freire                       ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;talitagregory@hotmail.com
+20182 ; DEC7131; 04652  ; 17103359 ;Joel Joao Medeiros Filho                          ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;joel.joao.medeiros@grad.ufsc.br
+20182 ; DEC7131; 04652  ; 17104170 ;José Carlos Isoppo da Cunha                       ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;joseisoppo016@gmail.com
+20182 ; DEC7131; 04652  ; 17104173 ;Luciano Marcelino Fernandes                       ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;lucianomafer@hotmail.com
+20182 ; DEC7131; 04652  ; 17104178 ;Jonatan Santos Bereta                             ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;jonatan.bereta@grad.ufsc.br
+20182 ; DEC7131; 04652  ;    20182 ;***  _________________________________________________
 20182 ; DEC7131; 04652  ;    20182 ;*** SISTEMASSSSS OPEEEEERACIIIOOONAAAIISSSS                                                                               ;;;data: 02-10-2018
 20182 ; DEC7131; 04652  ; 14103207 ;Leonardo Paulino Nunes                            ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;leo_paulino_nunes@hotmail.com
 20182 ; DEC7131; 04652  ; 14104262 ;Lucas Pilar Xavier                                ;(652)-TECNOLOGIAS DA INFORMAÇÃO E COMUNICAÇÃO (noturno)  ;lucaspx93@gmail.com

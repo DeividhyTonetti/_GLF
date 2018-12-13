@@ -1,0 +1,16 @@
+Alunos_Matriculados
+
+20182 ; DEC7562; 08655  ;    20182 ;***  _________________________________________________
+20182 ; DEC7562; 08655  ;    20182 ;*** Sistemas Operacionais Embarcados                                                                    ;;;data: 02-10-2018
+20182 ; DEC7562; 08655  ; 12202431 ;Luis Henrique Herberts de Sousa                   ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;luis_herbets@hotmail.com
+20182 ; DEC7562; 08655  ; 12204264 ;Samuel Matias Bohm                                ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;samuca313@gmail.com
+20182 ; DEC7562; 08655  ; 13103946 ;Marcelly Homem Coelho                             ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;marcelly_homem@hotmail.com
+20182 ; DEC7562; 08655  ; 13202447 ;Thiago Aguiar Becker                              ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;thiago_becker93_@hotmail.com
+20182 ; DEC7562; 08655  ; 13203715 ;Mihael Zamin Sousa                                ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;mihael.zaminsousa@gmail.com
+20182 ; DEC7562; 08655  ; 13205677 ;Felipe Adam Menegon Cieslak                       ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;felipecieslak@hotmail.com
+20182 ; DEC7562; 08655  ; 14103299 ;Gabriel Assunção Domene                           ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;domenee.g@gmail.com
+20182 ; DEC7562; 08655  ; 14103308 ;Julian Henrique Perucchi                          ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;julian_ps1@hotmail.com
+20182 ; DEC7562; 08655  ; 14103315 ;Morgana Sartor                                    ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;morgana.sartor@outlook.com
+20182 ; DEC7562; 08655  ; 14106482 ;Guilherme Silva Inácio                            ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;gsilvainacio@gmail.com
+20182 ; DEC7562; 08655  ; 14202492 ;Matheus Francisco Batista Machado                 ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;matheusmachadoufsc@gmail.com
+20182 ; DEC7562; 08655  ; 15104637 ;Rafael Selau Martins Rocho                        ;(655)-ENGENHARIA DE COMPUTAÇÃO [Campus Araranguá]        ;rafaelrocho_@hotmail.com

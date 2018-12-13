@@ -49,8 +49,7 @@
 
             $html = '
             <!DOCTYPE html>
-                <html lang="PT-BR" >
-        
+                <html lang="PT-BR">
                     <head>
                         <meta charset="UTF-8">
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -66,9 +65,33 @@
                                 <input id="option'.$key.'" name="option'.$key.'" type="checkbox" onclick="mudarEstado'.$key.'('."'minhaDiv".$key."'".')"/>
                                 <label for="option'.$key.'">'.$disciplina[$key].'</label>
                             </div>
+                            
                             <div id = "minhaDiv'.$key.'" style = "display: none;"">
-                                <label>Entre com o Dia e a Hora: </label>
-                                <input type = "text" name = "hours" value = "">
+                                <div>    
+                                    <label>Entre com o Dia e a Hora: </label>
+                                </div>
+                                <div>
+                                    <select name = "op1[]">
+                                        <option value = "0">DIA</option> 
+                                        <option value = "2"> Segunda</option> 
+                                        <option value = "3"> Terça</option>
+                                        <option value = "4"> Quarta</option> 
+                                        <option value = "5"> Quinta</option> 
+                                        <option value = "6"> Sexta</option> 
+                                    </select>
+                                    <input id="hours" type = "time" name = "hours[]" value = "">
+                                </div>
+                                <div>
+                                    <select name = "op2[]">
+                                        <option value = "0">DIA</option> 
+                                        <option value = "2"> Segunda</option> 
+                                        <option value = "3"> Terça</option>
+                                        <option value = "4"> Quarta</option> 
+                                        <option value = "5"> Quinta</option> 
+                                        <option value = "6"> Sexta</option>  
+                                    </select>
+                                    <input id="hours1" type = "time" name = "hours1[]" value = "">
+                                </div>
                             </div>
                             ';
                         }
@@ -87,11 +110,9 @@
           $_SESSION['semestre'] = $semestre;
 
           echo $html;
-          
-          //$this->tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive);
         }
 
-        public function tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive)
+        public function tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive, $hours1, $hours2, $opt1, $opt2)
         {  
             $xls = new Xls();
             $order = new Order();
@@ -116,14 +137,14 @@
                         'nomeDis' => $data[$key]['nomeDis'],
                         'numDis' => $data[$key]['numDis'],
                         'matricula' => $data[$key]['matricula'],
-                        'nomeAlu' => $data[$key]['nomeAlu']
+                        'nomeAlu' => $data[$key]['nomeAlu'],
+                        'hours1' => $hours1[$i],
+                        'hours1' => $hours2[$i]
                     ];
 
+                    $dataFinal = $order->orderVector($dataFinal);
                     
-                    var_dump($dataFinal);
-                    //$dataFinal = $order->orderVector($dataFinal);
-
-                    $xls->printTable($dataFinal, $siape, $name, $date1, $date2);
+                    $xls->printTable($dataFinal, $siape, $name, $date1, $date2, $opt1, $opt2);
                     $dataFinal = array();
                     $i++;
                 }
@@ -135,7 +156,8 @@
                         'nomeDis' => $data[$key]['nomeDis'],
                         'numDis' => $data[$key]['numDis'],
                         'matricula' => $data[$key]['matricula'],
-                        'nomeAlu' => $data[$key]['nomeAlu']
+                        'nomeAlu' => $data[$key]['nomeAlu'],
+                        'hours' => $hours1[$i]
                     ];
                 }
             }

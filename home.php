@@ -260,7 +260,68 @@
                                                 
                                                 success: function(msg)
                                                 { 
-                                                  console.log(msg);
+                                                  $.ajax(
+                              {
+                                url: 'model/generator.php',
+                                data: formData,
+                                type: 'POST',
+                                contentType: false, 
+                                processData: false, 
+                                
+                                success: function(msg)
+                                {
+                                                          $.confirm(
+                                                          {
+                                                            title: '<center>Teste!</center>',
+                                                            content: msg,
+                                                            type: 'blue',
+                                                            typeAnimated: true,
+                                                            theme: 'modern',
+                                                            animation: 'rotate',
+                                                            
+                                                            buttons: 
+                                                            {
+                                                                baixar: 
+                                                                {
+                                                                    text: 'Baixar',
+                                                                    btnClass: 'btn-blue',
+                                                                    useBootstrap: true,
+                                                                    animation: 'news',
+                                                                    closeAnimation: 'news',
+                                                                    content: 'url: model/generator.php',
+                                                                    
+                                                                    action: function()
+                                                                    {
+                                                                      var form = $('form')[0]; // You need to use standard javascript object here
+                                                                      var formData = new FormData(form);
+
+                                                                      $.ajax(
+                                                                      {
+                                                                        url: 'model/generator.php',
+                                                                        data: formData,
+                                                                        type: 'POST',
+                                                                        contentType: false, 
+                                                                        processData: false, 
+                                                                        
+                                                                        success: function(msg)
+                                                                        { 
+                                                                          console.log(msg);
+                                                                        }
+                                                                      });
+                                                                    }
+                                                                },
+                                                                close: function () 
+                                                                {
+
+                                                                }
+                                                            },
+                                                            action: function()
+                                                            {
+
+                                                            }
+                                                          });
+                                                        }
+                                                      });
                                                 }
                                               });
                                             }
@@ -342,7 +403,85 @@
           {
             document.getElementById(el).style.display = 'none';
           }
-        }        
+        }
+        function mudarEstado4(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option4').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+        function mudarEstado5(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option5').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+        function mudarEstado6(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option6').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+        function mudarEstado7(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option7').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+        function mudarEstado8(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option8').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }
+        function mudarEstado9(el) 
+        {
+          var display = document.getElementById(el).style.display;
+
+          if(document.getElementById('option9').checked)
+          {
+              document.getElementById(el).style.display = 'block';
+          }
+          else
+          {
+            document.getElementById(el).style.display = 'none';
+          }
+        }      
     </script>
   </body>
 </html>

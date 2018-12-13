@@ -1,10 +1,13 @@
-.inputGroup {
+.inputGroup 
+{
   background-color: #fff;
   display: block;
   margin: 0px 0;
   position: relative;
 }
-.inputGroup label {
+
+.inputGroup label 
+{
   padding: 2px 0px;
   width: 100%;
   display: block;
@@ -16,7 +19,9 @@
   transition: color 200ms ease-in;
   overflow: hidden;
 }
-.inputGroup label:before {
+
+.inputGroup label:before 
+{
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -31,7 +36,9 @@
   opacity: 0;
   z-index: -1;
 }
-.inputGroup label:after {
+
+.inputGroup label:after 
+{
   width: 32px;
   height: 32px;
   content: '';
@@ -50,19 +57,25 @@
   cursor: pointer;
   transition: all 200ms ease-in;
 }
-.inputGroup input:checked ~ label {
+
+.inputGroup input:checked ~ label 
+{
   color: #fff;
 }
-.inputGroup input:checked ~ label:before {
+
+.inputGroup input:checked ~ label:before 
+{
   -webkit-transform: translate(-50%, -50%) scale3d(56, 56, 1);
           transform: translate(-50%, -50%) scale3d(56, 56, 1);
   opacity: 1;
 }
-.inputGroup input:checked ~ label:after {
+.inputGroup input:checked ~ label:after 
+{
   background-color: #54E0C7;
   border-color: #54E0C7;
 }
-.inputGroup input {
+.inputGroup input 
+{
   width: 32px;
   height: 32px;
   order: 1;
@@ -76,7 +89,8 @@
   visibility: hidden;
 }
 
-.form {
+.form 
+{
   padding: 0 16px;
   max-width: 550px;
   margin:  auto;
@@ -85,17 +99,20 @@
   line-height: 36px;
 }
 
-body {
+body 
+{
   background-color: #d1d7dc;
   font-family: "Fira Sans", sans-serif;
 }
 
 *,
 *::before,
-*::after {
+*::after 
+{
   box-sizing: inherit;
 }
 
-html {
+html 
+{
   box-sizing: border-box;
 }
