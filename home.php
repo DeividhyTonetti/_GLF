@@ -65,57 +65,6 @@
             </div>
           </div>
         </div>
-        <section class="content">
-        <div class="row">
-          <div class="col-md-12">
-                <div class="card">
-                <table class="tg">
-                  <tr>
-                    <th class="tg-wvxr"></th>
-                    <th class="tg-5kju"></th>
-                    <th class="tg-5kju"></th>
-                    <th class="tg-5kju"></th>
-                    <th class="tg-wvxr"></th>
-                    <th class="tg-ir8p" rowspan="3"></th>
-                    <th class="tg-iu89" rowspan="2"><span style="font-weight:bold;text-decoration:underline">Pag.</span><br><span style="font-weight:bold">1</span></th>
-                  </tr>
-                  <tr>
-                    <td class="tg-xds7" colspan="2">DISCIPLINA AQUI</td>
-                    <td class="tg-g5qm">NOME DA DISCIPLINA AQUI</td>
-                    <td class="tg-8rb3" colspan="2">Turma: <span style="font-weight:bold">AQUI</span></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-vhpi">Ordem</td>
-                    <td class="tg-4qi8"><span style="font-weight:bold">Matrícula</span></td>
-                    <td class="tg-e7lt">Aluno</td>
-                    <td class="tg-e7lt"> Nota</td>
-                    <td class="tg-vhpi">Freq.</td>
-                    <td class="tg-t2qg">Ordem</td>
-                  </tr>
-                  <tr>
-                    <td class="tg-kvd6"></td>
-                    <td class="tg-rqvj"></td>
-                    <td class="tg-rqvj"></td>
-                    <td class="tg-rqvj"></td>
-                    <td class="tg-kvd6"></td>
-                    <td class="tg-72fs"></td>
-                    <td class="tg-kvd6"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-iu89"></td>
-                    <td class="tg-4qi8"></td>
-                    <td class="tg-4qi8"></td>
-                    <td class="tg-4qi8"></td>
-                    <td class="tg-iu89"></td>
-                    <td class="tg-ir8p"></td>
-                    <td class="tg-iu89"></td>
-                  </tr>
-                </table>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
       <aside class="control-sidebar control-sidebar-dark">
       </aside>

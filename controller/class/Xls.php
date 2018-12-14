@@ -16,6 +16,7 @@
             $arquivo = 'planilha.xls';
             $i = 8;
             $l = 0;
+            $p = 1;
 
             $spreadsheet = new Spreadsheet();
             $writer = new Xlsx($spreadsheet);
@@ -27,6 +28,7 @@
             //Configuro a página para impressão
             $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
             $spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+            
             //$spreadsheet->getActiveSheet()->getPageSetup()->setFitToPage(100);
             $spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1);
             $spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0);
@@ -52,7 +54,7 @@
                 //Seto as laguras das colunas
                 $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(38);
                 $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(15); 
-                $spreadsheet->getActiveSheet()->getColumnDimension('AU')->setWidth(6);
+                $spreadsheet->getActiveSheet()->getColumnDimension('AU')->setWidth(8);
 
                 foreach(range('F', 'Z') as $column) 
                 {
@@ -92,49 +94,16 @@
                 $spreadsheet->getActiveSheet()->mergeCells('A6:B6');
                 $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
 
-                                //DA PRA FAZER UM FOR
                 //Mesclo as células
-                $spreadsheet->getActiveSheet()->mergeCells('F4:F7');
-                $spreadsheet->getActiveSheet()->mergeCells('G4:G7');
-                $spreadsheet->getActiveSheet()->mergeCells('H4:H7');
-                $spreadsheet->getActiveSheet()->mergeCells('I4:I7');
-                $spreadsheet->getActiveSheet()->mergeCells('J4:J7');
-                $spreadsheet->getActiveSheet()->mergeCells('K4:K7');
-                $spreadsheet->getActiveSheet()->mergeCells('L4:L7');
-                $spreadsheet->getActiveSheet()->mergeCells('M4:M7');
-                $spreadsheet->getActiveSheet()->mergeCells('N4:N7');
-                $spreadsheet->getActiveSheet()->mergeCells('O4:O7');
-                $spreadsheet->getActiveSheet()->mergeCells('P4:P7');
-                $spreadsheet->getActiveSheet()->mergeCells('Q4:Q7');
-                $spreadsheet->getActiveSheet()->mergeCells('R4:R7');
-                $spreadsheet->getActiveSheet()->mergeCells('S4:S7');
-                $spreadsheet->getActiveSheet()->mergeCells('T4:T7');
-                $spreadsheet->getActiveSheet()->mergeCells('U4:U7');
-                $spreadsheet->getActiveSheet()->mergeCells('V4:V7');
-                $spreadsheet->getActiveSheet()->mergeCells('W4:W7');
-                $spreadsheet->getActiveSheet()->mergeCells('X4:X7');
-                $spreadsheet->getActiveSheet()->mergeCells('Y4:Y7');
-                $spreadsheet->getActiveSheet()->mergeCells('Z4:Z7');
-                $spreadsheet->getActiveSheet()->mergeCells('AA4:AA7');
-                $spreadsheet->getActiveSheet()->mergeCells('AB4:AB7');
-                $spreadsheet->getActiveSheet()->mergeCells('AC4:AC7');
-                $spreadsheet->getActiveSheet()->mergeCells('AD4:AD7');
-                $spreadsheet->getActiveSheet()->mergeCells('AE4:AE7');
-                $spreadsheet->getActiveSheet()->mergeCells('AF4:AF7');
-                $spreadsheet->getActiveSheet()->mergeCells('AG4:AG7');
-                $spreadsheet->getActiveSheet()->mergeCells('AH4:AH7');
-                $spreadsheet->getActiveSheet()->mergeCells('AI4:AI7');
-                $spreadsheet->getActiveSheet()->mergeCells('AJ4:AJ7');
-                $spreadsheet->getActiveSheet()->mergeCells('AK4:AK7');
-                $spreadsheet->getActiveSheet()->mergeCells('AL4:AL7');
-                $spreadsheet->getActiveSheet()->mergeCells('AM4:AM7');
-                $spreadsheet->getActiveSheet()->mergeCells('AN4:AN7');
-                $spreadsheet->getActiveSheet()->mergeCells('AO4:AO7');
-                $spreadsheet->getActiveSheet()->mergeCells('AP4:AP7');
-                $spreadsheet->getActiveSheet()->mergeCells('AQ4:AQ7');
-                $spreadsheet->getActiveSheet()->mergeCells('AR4:AR7');
-                $spreadsheet->getActiveSheet()->mergeCells('AS4:AS7');
-                $spreadsheet->getActiveSheet()->mergeCells('AT4:AT7');
+                foreach(range('F', 'Z') as $mesc) 
+                {
+                    $spreadsheet->getActiveSheet()->mergeCells($mesc.'4:'.$mesc.'7');
+                }
+    
+                foreach(range('A', 'T') as $mesc) 
+                {
+                    $spreadsheet->getActiveSheet()->mergeCells('A'.$mesc.'4:'.'A'.$mesc.'7');
+                }
                 
                 //Insiro dados nas células
                 $spreadsheet->getActiveSheet()->setCellValue('F1', 'LISTA DE FREQUÊNCIA    -   Semestre - '.$_SESSION['semestre']);
@@ -183,27 +152,19 @@
                     }
                 }
                 
-
+                //Vejp se meu índice i é par ou impar para pintar a cédula.
                 if($i % 2 == 1)
                 {
-                    $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
-                    $spreadsheet->getActiveSheet()->setCellValue('AU'.$i, $key);
-                    $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
-                    $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
-                
+                    $this->paint($spreadsheet, $i, $key, $dataFinal);
                 }
                 else
                 {
-                    $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
-                    $spreadsheet->getActiveSheet()->setCellValue('AU'.$i, $key);
-                    $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
-                    $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+                    $this->paint($spreadsheet, $i, $key, $dataFinal);
 
                     $spreadsheet->getActiveSheet()->getStyle('A'.$i.':AU'.$i)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFA0A0A0');
                 }              
 
-              //Quebro linha caso haja necessidade 
-
+                //Quebro linha caso haja necessidade 
                 $spreadsheet->getActiveSheet()->getStyle('C8:C18')->getAlignment()->setWrapText(true);
 
                 // Costruimos um array para setar os estilos de linha, font, borda, cores, alinhamento etc..
@@ -253,6 +214,7 @@
                 $spreadsheet->getActiveSheet()->getStyle('F3:AU3')->applyFromArray($styleArray);
                 $spreadsheet->getActiveSheet()->getStyle('AT4:AT7')->applyFromArray($styleArray);
                 $spreadsheet->getActiveSheet()->getStyle('F1:AU2')->applyFromArray($styleArray);
+                $spreadsheet->getActiveSheet()->getStyle('AU7')->applyFromArray($styleArray);
 
                 //alguns styles estou usando fora do vetor -- mas seria de suma importância fazer dentro de um vetor
                 $spreadsheet->getActiveSheet()->getStyle('F4:AT7')->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
@@ -295,7 +257,7 @@
             $i++;
             $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':AJ'.$i); // Mensagem Matricula Inicial
             $spreadsheet->getActiveSheet()->mergeCells('AK'.$i.':AU'.$i);// DATA E HORA
-            $spreadsheet->getActiveSheet()->getStyle('AR'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('AK'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
             $i++;
             $spreadsheet->getActiveSheet()->mergeCells('A'.$i.':AH'.$i);
@@ -364,18 +326,15 @@
             $spreadsheet->getActiveSheet()->setCellValue('A8', 'Ordem');
 
             $spreadsheet->getActiveSheet()->setCellValue('B8', 'Matrícula');
-            $spreadsheet->getActiveSheet()->setCellValue('C8', '1');
-            $spreadsheet->getActiveSheet()->setCellValue('D8', '2');
-            $spreadsheet->getActiveSheet()->setCellValue('E8', '3');
-            $spreadsheet->getActiveSheet()->setCellValue('F8', '4');
-            $spreadsheet->getActiveSheet()->setCellValue('G8', '5');
-            $spreadsheet->getActiveSheet()->setCellValue('H8', '6');
-            $spreadsheet->getActiveSheet()->setCellValue('I8', '7');
-            $spreadsheet->getActiveSheet()->setCellValue('J8', '8');
+            foreach(range('A', 'J') as $mesc) 
+            {
+                $spreadsheet->getActiveSheet()->setCellValue($mesc.'8', $p);
+
+                $p++;
+            }
             $spreadsheet->getActiveSheet()->setCellValue('K8', 'N. Final');
 
             // Costruimos um array para setar os estilos de linha, font, borda, cores, alinhamento etc..
-            
             $styleTab1 = [
                 'font' => [
                     'bold' => true,
@@ -461,15 +420,11 @@
 
             //Mesclo as células
             $spreadsheet->getActiveSheet()->mergeCells('A'.$k.':B'.$k);
-            $spreadsheet->getActiveSheet()->mergeCells('C'.$k.':C'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('D'.$k.':D'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('E'.$k.':E'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('F'.$k.':F'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('G'.$k.':G'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('H'.$k.':H'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('I'.$k.':I'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('J'.$k.':J'.$l);
-            $spreadsheet->getActiveSheet()->mergeCells('K'.$k.':K'.$l);
+
+            foreach(range('C', 'K') as $mesc1) 
+            {
+                $spreadsheet->getActiveSheet()->mergeCells($mesc1.$k.':'.$mesc1.$l);
+            }
 
             for ($i = 48; $i <= 51; $i++) 
             { 
@@ -506,6 +461,18 @@
             $drawing1->setWorksheet($spreadsheet->getActiveSheet());
             $spreadsheet->setActiveSheetIndex(0);
             $this->donwload($spreadsheet, $dataFinal[$key]['disciplina']); 
+        }
+
+        //Função estática para incluir as formulas e uma parte do código repetido.
+        private static function paint($spreadsheet, $i, $key, $dataFinal)
+        {
+            $spreadsheet->getActiveSheet()->setCellValue('A'.$i, $key);
+            $spreadsheet->getActiveSheet()->setCellValue('AU'.$i, $key);
+            $spreadsheet->getActiveSheet()->setCellValue('B'.$i, intval($dataFinal[$key]['matricula']));
+            $spreadsheet->getActiveSheet()->setCellValue('C'.$i, $dataFinal[$key]['nomeAlu']);
+
+            $spreadsheet->getActiveSheet()->setCellValue('AT'.$i,'=SUM(F'.$i.':AS'.$i.')*2');
+            $spreadsheet->getActiveSheet()->setCellValue('E'.$i,'=IF(AT'.$i.'<=18,"FS","FI")');
         }
 
         public function donwload($spreadsheet, $archiveName)
