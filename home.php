@@ -48,6 +48,7 @@
             </div>
           </div>
           <button class="example2-2 btn btn-primary">EXEMPLO</button>
+          <input type="text" id="dataR">
         </div>
       </aside>
       <div class="content-wrapper">
@@ -87,8 +88,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
     <script type="text/javascript">
-        $('.example2-2').on('click', function () {
-            $.confirm({
+        $('.example2-2').on('click', function () 
+        {
+            $.confirm(
+            {
                 title: 'Entre com seus dados',
                 content: '' +
                 '<form class="formName" action = "teste.php" id = teste  enctype="multipart/form-data">'+
@@ -208,69 +211,21 @@
                                                 processData: false, 
                                                 
                                                 success: function(msg)
-                                                { 
-                                                  $.ajax(
-                              {
-                                url: 'model/generator.php',
-                                data: formData,
-                                type: 'POST',
-                                contentType: false, 
-                                processData: false, 
-                                
-                                success: function(msg)
-                                {
-                                                          $.confirm(
-                                                          {
-                                                            title: '<center>Teste!</center>',
-                                                            content: msg,
-                                                            type: 'blue',
-                                                            typeAnimated: true,
-                                                            theme: 'modern',
-                                                            animation: 'rotate',
-                                                            
-                                                            buttons: 
-                                                            {
-                                                                baixar: 
-                                                                {
-                                                                    text: 'Baixar',
-                                                                    btnClass: 'btn-blue',
-                                                                    useBootstrap: true,
-                                                                    animation: 'news',
-                                                                    closeAnimation: 'news',
-                                                                    content: 'url: model/generator.php',
-                                                                    
-                                                                    action: function()
-                                                                    {
-                                                                      var form = $('form')[0]; // You need to use standard javascript object here
-                                                                      var formData = new FormData(form);
-
-                                                                      $.ajax(
-                                                                      {
-                                                                        url: 'model/generator.php',
-                                                                        data: formData,
-                                                                        type: 'POST',
-                                                                        contentType: false, 
-                                                                        processData: false, 
-                                                                        
-                                                                        success: function(msg)
-                                                                        { 
-                                                                          console.log(msg);
-                                                                        }
-                                                                      });
-                                                                    }
-                                                                },
-                                                                close: function () 
-                                                                {
-
-                                                                }
-                                                            },
-                                                            action: function()
-                                                            {
-
-                                                            }
-                                                          });
-                                                        }
-                                                      });
+                                                {   
+                                                  $.alert(
+                                                  {
+                                                    title: '<center>Teste!</center>',
+                                                    content: msg,
+                                                    type: 'blue',
+                                                    typeAnimated: true,
+                                                    theme: 'modern',
+                                                    animation: 'rotate',
+                                                    
+                                                    action: function(msg)
+                                                    {
+                                                      console.log(msg);
+                                                    }
+                                                  });
                                                 }
                                               });
                                             }
@@ -430,7 +385,21 @@
           {
             document.getElementById(el).style.display = 'none';
           }
-        }      
+        }
+        
+        $(document).ready(function()
+        {
+          var semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+          
+          $("input#dataR").blur(function()
+          {
+              var data = this.value;
+              var arr = data.split("/").reverse();
+              var teste = new Date(arr[0], arr[1] - 1, arr[2]);
+              var dia = teste.getDay();
+              alert(semana[dia]);
+          });
+    });
     </script>
   </body>
 </html>

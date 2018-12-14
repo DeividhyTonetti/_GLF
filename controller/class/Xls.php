@@ -17,6 +17,7 @@
             $i = 8;
             $l = 0;
             $p = 1;
+            $z = 1;
 
             $spreadsheet = new Spreadsheet();
             $writer = new Xlsx($spreadsheet);
@@ -209,7 +210,8 @@
                         ],
                     ],
                 ];
-                
+                $spreadsheet->getActiveSheet()->getStyle('E'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $spreadsheet->getActiveSheet()->getStyle('AT'.$i)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $spreadsheet->getActiveSheet()->getStyle('A6:E7')->applyFromArray($styleArray);
                 $spreadsheet->getActiveSheet()->getStyle('F3:AU3')->applyFromArray($styleArray);
                 $spreadsheet->getActiveSheet()->getStyle('AT4:AT7')->applyFromArray($styleArray);
@@ -305,34 +307,35 @@
             $j = 9;
 
             //Mesclo as células
-            $spreadsheet->getActiveSheet()->mergeCells('A1:K5');
-            $spreadsheet->getActiveSheet()->mergeCells('A6:C6');
-            $spreadsheet->getActiveSheet()->mergeCells('D6:E6');
-            $spreadsheet->getActiveSheet()->mergeCells('F6:I6');
-            $spreadsheet->getActiveSheet()->mergeCells('J6:K6');
-            $spreadsheet->getActiveSheet()->mergeCells('A7:K7');
+            $spreadsheet->getActiveSheet()->mergeCells('A1:I5'); // Logo
+            $spreadsheet->getActiveSheet()->mergeCells('A6:C6'); // Disciplina
+            $spreadsheet->getActiveSheet()->mergeCells('D6:E6'); // Turma
+            $spreadsheet->getActiveSheet()->mergeCells('F6:G6'); // Horas Aula
+            $spreadsheet->getActiveSheet()->mergeCells('H6:I6'); // Aulas
+            $spreadsheet->getActiveSheet()->mergeCells('A7:I7'); // Controle 
 
+            //Mesclo a células da 2ª coluna
             for ($i=8; $i <=46 ; $i++) 
             { 
-                $spreadsheet->getActiveSheet()->mergeCells('N'.$i.':O'.$i);
+                $spreadsheet->getActiveSheet()->mergeCells('K'.$i.':L'.$i);
             }
 
             //Insiro dados nas células
-            $spreadsheet->getActiveSheet()->setCellValue('A6', 'Disciplina: '.$dataFinal[$key]['disciplina']);
+            $spreadsheet->getActiveSheet()->setCellValue('A6', 'Disciplina: '.$data[$key]['nomeDis']);
             $spreadsheet->getActiveSheet()->setCellValue('D6', 'Turma: '.$data[$key]['numDis']);
             $spreadsheet->getActiveSheet()->setCellValue('F6', 'Horas Aula: ');
-            $spreadsheet->getActiveSheet()->setCellValue('J6', 'Aulas: ');
+            $spreadsheet->getActiveSheet()->setCellValue('H6', 'Aulas: ');
             $spreadsheet->getActiveSheet()->setCellValue('A7', 'CONTROLE DE AVALIAÇÕES: ');
             $spreadsheet->getActiveSheet()->setCellValue('A8', 'Ordem');
 
             $spreadsheet->getActiveSheet()->setCellValue('B8', 'Matrícula');
-            foreach(range('A', 'J') as $mesc) 
+            foreach(range('C', 'H') as $mesc) 
             {
                 $spreadsheet->getActiveSheet()->setCellValue($mesc.'8', $p);
 
                 $p++;
             }
-            $spreadsheet->getActiveSheet()->setCellValue('K8', 'N. Final');
+            $spreadsheet->getActiveSheet()->setCellValue('I8', 'N. Final');
 
             // Costruimos um array para setar os estilos de linha, font, borda, cores, alinhamento etc..
             $styleTab1 = [
@@ -379,37 +382,58 @@
             //---------------------------TABELA 2 NOVA ABA------------------------------
 
             //Seto as laguras das colunas
-            $spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(40);
-            $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(10);
-            $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(37);
+            $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(10.50);
+            $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(39);
+            $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+            $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(11.50);
 
             //Mesclo as células
-            $spreadsheet->getActiveSheet()->mergeCells('N1:O1');
-            $spreadsheet->getActiveSheet()->mergeCells('M2:N2');
-            $spreadsheet->getActiveSheet()->mergeCells('M4:N4');
-            $spreadsheet->getActiveSheet()->mergeCells('M5:N5');
-            $spreadsheet->getActiveSheet()->mergeCells('N7:O7');
+            $spreadsheet->getActiveSheet()->mergeCells('J1:L2');
+            $spreadsheet->getActiveSheet()->mergeCells('J3:K3');
+            $spreadsheet->getActiveSheet()->mergeCells('J4:K4');
+            $spreadsheet->getActiveSheet()->mergeCells('J5:K5');
+            $spreadsheet->getActiveSheet()->mergeCells('K7:L7');
             
             //Insiro dados nas células
-            $spreadsheet->getActiveSheet()->setCellValue('N1', 'LISTA DE FREQUÊNCIA    -     Semestre: '.$_SESSION['semestre']);
-            $spreadsheet->getActiveSheet()->setCellValue('M3', 'Horário do Prof. para Atendimento aos Alunos (Extraclasse)');
-            $spreadsheet->getActiveSheet()->setCellValue('M4', 'Dia da semana: ');
-            $spreadsheet->getActiveSheet()->setCellValue('M5', 'Nome do Monitor: ');
-            $spreadsheet->getActiveSheet()->setCellValue('O3', 'Horários/Locais');
-            $spreadsheet->getActiveSheet()->setCellValue('O4', 'AQUI VAI O HORARIO');
-            $spreadsheet->getActiveSheet()->setCellValue('O5', 'AQUI VAI O LOCAL');
-            $spreadsheet->getActiveSheet()->setCellValue('M7', 'Datas');
-            $spreadsheet->getActiveSheet()->setCellValue('N7', 'Conteúdo Programático estabelecido no Plano de Ensino');
+            $spreadsheet->getActiveSheet()->setCellValue('J1', 'LISTA DE FREQUÊNCIA    -     Semestre: '.$_SESSION['semestre']);
+            $spreadsheet->getActiveSheet()->setCellValue('J3', 'Horário p/ Atendimento');
+            $spreadsheet->getActiveSheet()->setCellValue('J4', 'Dia da semana: ');
+            $spreadsheet->getActiveSheet()->setCellValue('J5', 'Nome do Monitor: ');
+            $spreadsheet->getActiveSheet()->setCellValue('L3', 'Horários/Locais');
+            $spreadsheet->getActiveSheet()->setCellValue('L4', 'AQUI VAI O HORARIO');
+            $spreadsheet->getActiveSheet()->setCellValue('L5', 'AQUI VAI O LOCAL');
+            $spreadsheet->getActiveSheet()->setCellValue('J7', 'Datas');
+            $spreadsheet->getActiveSheet()->setCellValue('K7', 'Conteúdo Programático estabelecido no Plano de Ensino');
+
+            for ($q=8; $q <= 21; $q++) 
+            { 
+                foreach(range('F', 'Z') as $inser) 
+                {
+                    $spreadsheet->getActiveSheet()->setCellValue('J'.$q,'=Frente!'.$inser.'4');
+                    $q++;
+                }
+            }
+
+            for ($q=22; $q <= 40; $q++) 
+            { 
+                foreach(range('A', 'S') as $inser) 
+                {
+                    $spreadsheet->getActiveSheet()->setCellValue('J'.$q,'=Frente!A'.$inser.'4');
+                    $q++;
+                }
+            }  
 
             //Pegamos o Array anterior para estilizar alguns parametros
-            $spreadsheet->getActiveSheet()->getStyle('M7:O7')->applyFromArray($styleTab1);
+            $spreadsheet->getActiveSheet()->getStyle('C7:L7')->applyFromArray($styleTab1);
+            $spreadsheet->getActiveSheet()->getStyle('J1')->applyFromArray($styleArray);
             
             //Estilizmos (NEGRITO)
-            $spreadsheet->getActiveSheet()->getStyle('M3:N5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $spreadsheet->getActiveSheet()->getStyle('O3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $spreadsheet->getActiveSheet()->getStyle('O3:O5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-            $spreadsheet->getActiveSheet()->getStyle('N1')->getFont()->setBold(true);
-            $spreadsheet->getActiveSheet()->getStyle('M8:O46')->applyFromArray($styleTab2); 
+            $spreadsheet->getActiveSheet()->getStyle('J3:L5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('L3')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('L3:L5')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('J1')->getFont()->setBold(true);
+            $spreadsheet->getActiveSheet()->getStyle('J8:L46')->applyFromArray($styleTab2);
+            $spreadsheet->getActiveSheet()->getStyle('J3:L2')->applyFromArray($styleArray); 
 
             //---------------------------TABELA 3 NOVA ABA------------------------------
 
@@ -419,44 +443,57 @@
             $l = $k+3;
 
             //Mesclo as células
-            $spreadsheet->getActiveSheet()->mergeCells('A'.$k.':B'.$k);
+            $spreadsheet->getActiveSheet()->mergeCells('A'.$k.':B'.$l);
 
-            foreach(range('C', 'K') as $mesc1) 
+            foreach(range('C', 'H') as $mesc1) 
             {
                 $spreadsheet->getActiveSheet()->mergeCells($mesc1.$k.':'.$mesc1.$l);
             }
 
-            for ($i = 48; $i <= 51; $i++) 
+            for ($i = 49; $i <= 51; $i++) 
             { 
                 $spreadsheet->getActiveSheet()->mergeCells('M'.$i.':N'.$i);
             }
 
             //Estilizmos
-            $spreadsheet->getActiveSheet()->getStyle('C'.$k.':L'.$l)->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $spreadsheet->getActiveSheet()->getStyle('A'.$k.':K'.$l)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-
+            $spreadsheet->getActiveSheet()->getStyle('C'.$k.':H'.$l)->getAlignment()->setTextRotation(-90)->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('A'.$k.':H'.$l)->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('A6:E7')->applyFromArray($styleArray);
             //Insiro dados nas células
             $spreadsheet->getActiveSheet()->setCellValue('A'.$k, 'Data das Avaliações: ');
             
-            foreach(range('C', 'K') as $letter) 
+            foreach(range('C', 'H') as $letter) 
             { 
-                $spreadsheet->getActiveSheet()->setCellValue($letter.$k, '-'); 
+                $spreadsheet->getActiveSheet()->setCellValue($letter.$k, '-');
+                $spreadsheet->getActiveSheet()->getStyle($letter.$k)->applyFromArray($styleArray); 
             }
 
             //---------------------------TABELA 4 NOVA ABA------------------------------
 
+            //Mesclamos
+            $spreadsheet->getActiveSheet()->mergeCells('J48:L48');
+            foreach(range('K', 'L') as $mesc2) 
+            {
+                $spreadsheet->getActiveSheet()->mergeCells($mesc2.'48:'.$mesc2.'48');
+            } 
+
             //Estilizmos
-            $spreadsheet->getActiveSheet()->getStyle('O48')->getFont()->setBold(true);
-            $spreadsheet->getActiveSheet()->getStyle('O48')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $spreadsheet->getActiveSheet()->getStyle('M48')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $spreadsheet->getActiveSheet()->getStyle('M48:O51')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('K48')->getFont()->setBold(true);
+            $spreadsheet->getActiveSheet()->getStyle('K48')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $spreadsheet->getActiveSheet()->getStyle('J48:L48')->getBorders()->getAllborders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+            $spreadsheet->getActiveSheet()->getStyle('J48')->applyFromArray($styleArray);
+            $spreadsheet->getActiveSheet()->getStyle('J48:L51')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+            //Insere e estiliza
+            for ($u = 49; $u < 52; $u++) 
+            { 
+                $spreadsheet->getActiveSheet()->getStyle('J'.$u)->applyFromArray($styleArray);
+                $spreadsheet->getActiveSheet()->setCellValue('J'.$u, 'Nota'.$z.':');
+                $z++;
+            }
 
             //Insiro dados nas células
-            $spreadsheet->getActiveSheet()->setCellValue('O48', 'Pag. 1');
-            $spreadsheet->getActiveSheet()->setCellValue('M48', 'Observações:');
-            $spreadsheet->getActiveSheet()->setCellValue('M49', 'Nota 1: ');
-            $spreadsheet->getActiveSheet()->setCellValue('M50', 'Nota 2: ');
-            $spreadsheet->getActiveSheet()->setCellValue('M51', 'Nota 3: ');
+            $spreadsheet->getActiveSheet()->setCellValue('J48', 'Observações:');
 
             $drawing1->setWorksheet($spreadsheet->getActiveSheet());
             $spreadsheet->setActiveSheetIndex(0);

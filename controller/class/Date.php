@@ -140,10 +140,6 @@
                 $discF10 = 0;
             }
 
-            //var_dump($opt1[1][0]);
-            //var_dump(!empty($opt1[0][0]), !empty($opt1[1][0]), !empty($opt1[2][0]), !empty($opt1[3][0]), !empty($opt1[4][0]));
-            //echo "Disciplina 1: ". $discI1. " - ".$discF1."<br>". "Terça: ". $discI2. "<br>". "Quarta: ".$discI3."<br>". "Quinta: ". $discI4. "<br>". "Sexta: ". $discI5 ."<br>";  
-
             return $day = $this->day($discI1, $discF1, $discI2, $discF2, $discI3, $discF3, $discI4, $discF4, $discI5, $discF5, $discI6, $discF6, $discI7, $discF7, $discI8, $discF8, $discI9, $discF9, $date1, $date2);
         }
 
