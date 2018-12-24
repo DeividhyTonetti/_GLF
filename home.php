@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-  <html lang="PT-BR">
+  <html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <meta http-equiv="Content-Language" content="pt-br">
 
     <title>GLF</title>
     
@@ -94,19 +95,25 @@
             {
                 title: 'Entre com seus dados',
                 content: '' +
-                '<form class="formName" action = "teste.php" id = teste  enctype="multipart/form-data">'+
-                  '<div class="form-group">'+
-                    '<label>Entre com seu SIAPE</label>'+
-                    '<input type="text" class="name form-control" required="required" id = "siape" name="siape" placeholder="SIAPE" pattern="[0-9]+$" />'+
-                    '<label>Nome e Sobrenome</label>'+
-                    '<input type="text" class="name form-control" required="required" name="name" id = "name" placeholder="NOME" pattern="[a-z]+$" />'+
-                    '<label>Entre com a data de início</label>'+
-                    '<input type="date" placeholder="Data de ínicio" name = "date1" class="name form-control" id = "periodo1" required />'+
-                    '<label>Entre com a data de fechamento</label>'+
-                    '<input type="date" placeholder="Data de final" id = "periodo2" name = "date2" class="name form-control" required />'+
-                    '<label>Arquivo .TXT</label>'+
-                    '<input type="file" class="name form-control" name="fileUpload" id="file">'+
-                    '<input type="hidden" name="importar" value="import">'+
+                '<form class="formName" action = "teste.php" id = teste  enctype="multipart/form-data"><br>'+
+                  '<div class="container">'+     
+                    '<div class="name form-group">'+
+                      '<input type="text" class="name form-control" required="required" id = "siape" name="siape" pattern="[0-9]+$" />'+
+                      '<label class="name form-control-placeholder">Entre com seu SIAPE</label>'+
+                    '</div>'+
+                    '<div class="name form-group">'+
+                      '<input type="text" class="name form-control" required="required" name="name" id = "name" />'+
+                      '<label class="name form-control-placeholder">Nome e Sobrenome</label>'+                         
+                    '</div>'+
+                    '<div class="form-group">'+  
+                      '<label>Entre com a data de início</label>'+
+                      '<input type="date" placeholder="Data de ínicio" name = "date1" class="name form-control" id = "periodo1" required />'+
+                      '<label>Entre com a data de fechamento</label>'+
+                      '<input type="date" placeholder="Data de final" id = "periodo2" name = "date2" class="name form-control" required />'+
+                      '<label>Arquivo .TXT</label>'+
+                      '<input type="file" class="name form-control" name="fileUpload" id="file">'+
+                      '<input type="hidden" name="importar" value="import">'+
+                    '</div>'+
                   '</div>'+  
                 '</form>',
                 theme: 'modern',
@@ -177,6 +184,7 @@
                                 
                                 success: function(msg)
                                 {
+                                      
                                   $.confirm(
                                   {
                                     title: '<center>Escolha a disciplina!</center>',
@@ -199,6 +207,30 @@
                                             
                                             action: function()
                                             {
+                                              let day1 = this.$content.find('#option1').val();
+                                              let day2 = this.$content.find('#option2').val();
+                                              let hour1 = this.$content.find('#option2').val();
+                                              let hour2 = this.$content.find('#option2').val();
+
+                                              if(2<3)
+                                              {
+                                                $.alert(
+                                                  {
+                                                    title: '<center>Ops! Informou a hora ERRADA</center>',
+                                                    content: "Para continuar é necessário informar a hora corretamente.",
+                                                    type: 'red',
+                                                    typeAnimated: true,
+                                                    theme: 'modern',
+                                                    animation: 'rotate',
+                                                    icon: 'fa fa-clock-o',
+                                                    
+                                                    action: function(msg)
+                                                    {
+                                                      return false;
+                                                    }
+                                                  });
+                                              }
+                                              
                                               var form = $('form')[0]; // You need to use standard javascript object here
                                               var formData = new FormData(form);
 
@@ -386,20 +418,6 @@
             document.getElementById(el).style.display = 'none';
           }
         }
-        
-        $(document).ready(function()
-        {
-          var semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
-          
-          $("input#dataR").blur(function()
-          {
-              var data = this.value;
-              var arr = data.split("/").reverse();
-              var teste = new Date(arr[0], arr[1] - 1, arr[2]);
-              var dia = teste.getDay();
-              alert(semana[dia]);
-          });
-    });
     </script>
   </body>
 </html>

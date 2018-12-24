@@ -1,6 +1,6 @@
 <?php
 
-    ini_set('default_charset','ISO 8859-1');
+    header('Content-Type: text/html; charset=UTF-8');
     
     class Csv
     {
@@ -47,14 +47,16 @@
                 } 
             }
 
+            
             $html = '
             <!DOCTYPE html>
-                <html lang="PT-BR">
-                    <head>
-                        <meta charset="UTF-8">
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-                        <link rel="stylesheet" href="view/css/style.css">
-                    </head>
+            <html lang="pt-br">
+                <head>
+                    <meta charset="UTF-8">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+                    <link rel="stylesheet" href="view/css/style.css">
+                    <meta http-equiv="Content-Language" content="pt-br">
+                </head>
                     <body>
                         <form class="form">';
                         foreach ($disciplina as $key => $value) 
@@ -66,31 +68,37 @@
                                 <label for="option'.$key.'">'.$disciplina[$key].'</label>
                             </div>
                             
-                            <div id = "minhaDiv'.$key.'" style = "display: none;"">
+                            <div id = "minhaDiv'.$key.'" style = "display: none;"" class="name form-group">
                                 <div>    
                                     <label>Entre com o Dia e a Hora: </label>
                                 </div>
-                                <div>
-                                    <select name = "op1[]">
-                                        <option value = "0">DIA</option> 
-                                        <option value = "2"> Segunda</option> 
-                                        <option value = "3"> Terça</option>
-                                        <option value = "4"> Quarta</option> 
-                                        <option value = "5"> Quinta</option> 
-                                        <option value = "6"> Sexta</option> 
-                                    </select>
-                                    <input id="hours" type = "time" name = "hours[]" value = "">
-                                </div>
-                                <div>
-                                    <select name = "op2[]">
-                                        <option value = "0">DIA</option> 
-                                        <option value = "2"> Segunda</option> 
-                                        <option value = "3"> Terça</option>
-                                        <option value = "4"> Quarta</option> 
-                                        <option value = "5"> Quinta</option> 
-                                        <option value = "6"> Sexta</option>  
-                                    </select>
-                                    <input id="hours1" type = "time" name = "hours1[]" value = "">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div>
+                                            <select name = "op1[]" class="name form-control" id = "option1">
+                                                <option value = "0">DIA</option> 
+                                                <option value = "2"> Segunda</option> 
+                                                <option value = "3"> Terça</option>
+                                                <option value = "4"> Quarta</option> 
+                                                <option value = "5"> Quinta</option> 
+                                                <option value = "6"> Sexta</option> 
+                                            </select>
+                                            <input id="hours1" type = "time" name = "hours[]" value = "" class="name form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <select name = "op2[]" class="name form-control" id = "option2">
+                                                <option value = "0">DIA</option> 
+                                                <option value = "2"> Segunda</option> 
+                                                <option value = "3"> Terça</option>
+                                                <option value = "4"> Quarta</option> 
+                                                <option value = "5"> Quinta</option> 
+                                                <option value = "6"> Sexta</option>  
+                                            </select>
+                                            <input id="hour2" type = "time" name = "hours1[]" value = "" class="name form-control">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             ';
@@ -109,7 +117,7 @@
           $_SESSION['disciplina'] = $disciplina;
           $_SESSION['semestre'] = $semestre;
 
-          echo $html;
+         echo $html;
         }
 
         public function tratarDados($disciplina, $data, $siape, $name, $date1, $date2, $archive, $hours1, $hours2, $opt1, $opt2)
