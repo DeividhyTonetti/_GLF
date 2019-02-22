@@ -129,7 +129,6 @@
                     {
                         if($l<=21)
                         {
-                            echo $letter.'4<br>';
                             $spreadsheet->getActiveSheet()->setCellValue($letter.'4', $datEnd[$l]);
                             $spreadsheet->getActiveSheet()->getStyle($letter.'4')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                             
@@ -144,7 +143,6 @@
                     {
                         if($l<=39)
                         {
-                            echo $letter.$letter1.'4<br>';
                             $spreadsheet->getActiveSheet()->setCellValue('A'.$letter1.'4', $datEnd[$l]);
                             $spreadsheet->getActiveSheet()->getStyle('A'.$letter1.'4')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                             
@@ -497,7 +495,7 @@
 
             $drawing1->setWorksheet($spreadsheet->getActiveSheet());
             $spreadsheet->setActiveSheetIndex(0);
-            $this->donwload($spreadsheet, $dataFinal[$key]['disciplina']); 
+            $this->save($spreadsheet, $dataFinal[$key]['disciplina']); 
         }
 
         //Função estática para incluir as formulas e uma parte do código repetido.
@@ -512,19 +510,19 @@
             $spreadsheet->getActiveSheet()->setCellValue('E'.$i,'=IF(AT'.$i.'<=18,"FS","FI")');
         }
 
-        public function donwload($spreadsheet, $archiveName)
+        public function save($spreadsheet, $archiveName)
         {
-          $archiveName = trim($archiveName);
-
-            //Forço um donwload no formato xls
-
-            //header('Content-Type: application/vnd.ms-excel');
-            //header("Content-Disposition: attachment; filename=\"{$archiveName}\".xls" );
-            //header('Cache-Control: max-age=0');
+            $donwload = new Donwload();
+            $path = '..\view\upload\excel'.DIRECTORY_SEPARATOR.$archiveName.'.xls';
+            $archiveName = trim($archiveName);
 
             $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
-            $writer->save('..\view\upload\excel'.DIRECTORY_SEPARATOR.$archiveName.'.xls'); 
+            $writer->save($path);
+            
+            $donwload->arquivos($path);
           
+            //echo "view".DIRECTORY_SEPARATOR."upload".DIRECTORY_SEPARATOR."excel".DIRECTORY_SEPARATOR."$archiveName.xls";
+            
             exit;
         }
     }

@@ -49,7 +49,7 @@
 
             
             $html = '
-            <!DOCTYPE html>
+            
             <html lang="pt-br">
                 <head>
                     <meta charset="UTF-8">
@@ -60,7 +60,7 @@
                     <body>
                         <form class="form">';
                         foreach ($disciplina as $key => $value) 
-                        {  
+                        { 
                             $_SESSION['options'] = "option".$key;
                             $html.='
                             <div class="inputGroup">
@@ -117,6 +117,7 @@
           $_SESSION['disciplina'] = $disciplina;
           $_SESSION['semestre'] = $semestre;
 
+          //aqui vou ter que passar a data para verificar no jquery
          echo $html;
         }
 
